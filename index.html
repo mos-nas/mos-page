@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <script src="./translations.js?v=2026-04-19-5"></script>
     <script defer src="./script.js?v=2026-04-19-5"></script>
+    <script defer src="./apps.js?v=2026-04-19-5"></script>
   </head>
   <body>
     <a class="skip-link" href="#main" data-i18n="skipLink">Zum Inhalt springen</a>
@@ -77,6 +78,7 @@
 
         <nav class="nav" data-i18n-aria-label="nav.ariaLabel" aria-label="Hauptnavigation">
           <a class="nav-link" href="#features" data-i18n="nav.features">Features</a>
+          <a class="nav-link" href="./apps.html" target="_blank" rel="noopener" data-i18n="nav.apps">Apps</a>
           <a class="nav-link" href="#api" data-i18n="nav.api">API</a>
           <a class="nav-link" href="#opensource" data-i18n="nav.opensource">Open Source</a>
           <a class="nav-link" href="#usecases" data-i18n="nav.usecases">Use Cases</a>
@@ -445,6 +447,22 @@
               <h3 data-i18n="features.i18n.title">Mehrsprachig & Theme</h3>
               <p data-i18n="features.i18n.text">UI-Texte per i18n sowie Hell/Dunkel und Farben – passend zu deinem Setup.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="apps" class="section section-alt">
+        <div class="container">
+          <div class="section-head">
+            <h2 data-i18n="apps.title">Verfügbare Apps</h2>
+            <p class="muted" data-i18n="apps.subtitle">Apps &amp; Templates aus dem MOS Hub – mit einem Klick in MOS installierbar.</p>
+          </div>
+
+          <div id="apps-status" class="apps-status" data-i18n="apps.loading">Lade Apps…</div>
+          <div id="apps-grid" class="apps-grid" data-limit="8" hidden></div>
+
+          <div class="apps-teaser-actions">
+            <a class="btn btn-primary" href="./apps.html" target="_blank" rel="noopener" data-i18n="apps.viewAll">Alle Apps ansehen</a>
           </div>
         </div>
       </section>

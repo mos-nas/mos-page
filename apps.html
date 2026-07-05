@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+
+    <title data-i18n="apps.page.title">Apps – MOS</title>
+    <meta name="description" data-i18n-content="apps.subtitle" content="Apps & Templates aus dem MOS Hub – mit einem Klick in MOS installierbar." />
+
+    <link id="favicon" rel="icon" type="image/png" href="./assets/mos-black_square.png" />
+    <link id="apple-touch-icon" rel="apple-touch-icon" href="./assets/mos-black_square.png" />
+
+    <link rel="stylesheet" href="./styles.css?v=2026-04-19-4" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <script src="./translations.js?v=2026-04-19-5"></script>
+    <script defer src="./script.js?v=2026-04-19-5"></script>
+    <script defer src="./apps-page.js?v=2026-04-19-5"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#apps" data-i18n="skipLink">Zum Inhalt springen</a>
+
+    <div class="apps-floating-controls">
+      <button
+        id="apps-repos-btn"
+        class="btn btn-ghost"
+        type="button"
+        data-i18n-title="apps.repos.title"
+        data-i18n-aria-label="apps.repos.title"
+        title="Included Repositories"
+        aria-label="Included Repositories"
+        hidden
+      >
+        <span class="icon" aria-hidden="true"><i class="fa-solid fa-code-branch"></i></span>
+        <span class="hide-sm" data-i18n="apps.repos.button">Repositories</span>
+      </button>
+      <button
+        class="btn btn-ghost"
+        type="button"
+        data-action="toggle-language"
+        data-i18n-aria-label="header.language.ariaLabel"
+        data-i18n-title="header.language.title"
+        aria-label="Sprache umschalten"
+        title="Sprache"
+      >
+        <span class="icon" aria-hidden="true">🌐</span>
+        <span class="hide-sm" data-i18n="header.language">DE</span>
+      </button>
+      <button
+        class="btn btn-ghost"
+        type="button"
+        data-action="toggle-theme"
+        data-i18n-aria-label="header.theme.ariaLabel"
+        data-i18n-title="header.theme.title"
+        aria-label="Theme umschalten"
+        title="Theme"
+      >
+        <span class="icon" aria-hidden="true">◐</span>
+        <span class="hide-sm" data-i18n="header.theme">Theme</span>
+      </button>
+    </div>
+
+    <main class="apps-page">
+      <section id="apps" class="section">
+        <div class="container">
+          <div class="section-head">
+            <h1 data-i18n="apps.title">Verfügbare Apps</h1>
+            <p class="muted" data-i18n="apps.subtitle">Apps &amp; Templates aus dem MOS Hub – mit einem Klick in MOS installierbar.</p>
+          </div>
+
+          <div class="apps-toolbar">
+            <div class="apps-search">
+              <i class="fa-solid fa-magnifying-glass apps-search__icon" aria-hidden="true"></i>
+              <input
+                id="apps-search"
+                type="search"
+                class="apps-search__input"
+                data-i18n-placeholder="apps.search.placeholder"
+                placeholder="Apps durchsuchen…"
+                autocomplete="off"
+              />
+            </div>
+            <select id="apps-sort" class="apps-select" data-i18n-aria-label="apps.sort.label" aria-label="Sortierung">
+              <option value="date_desc" data-i18n="apps.sort.dateDesc">Neueste zuerst</option>
+              <option value="date_asc" data-i18n="apps.sort.dateAsc">Älteste zuerst</option>
+              <option value="updated_desc" data-i18n="apps.sort.updated">Zuletzt aktualisiert</option>
+              <option value="name_asc" data-i18n="apps.sort.nameAsc">Name (A–Z)</option>
+            </select>
+            <select id="apps-type" class="apps-select" data-i18n-aria-label="apps.filter.type" aria-label="Typ">
+              <option value="" data-i18n="apps.filter.all">Alle</option>
+            </select>
+            <select id="apps-category" class="apps-select" data-i18n-aria-label="apps.filter.category" aria-label="Kategorie">
+              <option value="" data-i18n="apps.filter.all">Alle</option>
+            </select>
+          </div>
+
+          <div id="apps-summary" class="apps-summary" aria-live="polite"></div>
+          <div id="apps-status" class="apps-status" data-i18n="apps.loading">Lade Apps…</div>
+          <div id="apps-grid" class="apps-grid" hidden></div>
+          <nav id="apps-pagination" class="apps-pagination" data-i18n-aria-label="apps.pagination.ariaLabel" aria-label="Seitennavigation" hidden></nav>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="container footer-inner">
+        <div>
+          <div class="footer-brand">MOS</div>
+          <div class="muted small">
+            ©
+            <span data-year></span>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html" data-i18n="nav.home">Startseite</a>
+          <a href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="footer.docs">Docs</a>
+          <a href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" data-i18n="footer.license">AGPLv3</a>
+        </div>
+      </div>
+    </footer>
+
+    <div id="apps-repos-modal" class="repos-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="apps-repos-title">
+      <div class="repos-modal__backdrop" data-repos-close></div>
+      <div class="repos-modal__content">
+        <button class="repos-modal__close" type="button" data-repos-close data-i18n-aria-label="modal.close" aria-label="Schließen">✕</button>
+        <h2 id="apps-repos-title" data-i18n="apps.repos.title">Included Repositories</h2>
+        <p class="muted small" id="apps-repos-count"></p>
+        <ul id="apps-repos-list" class="repos-list"></ul>
+      </div>
+    </div>
+
+    <div id="apps-detail-modal" class="repos-modal app-detail-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="apps-detail-title">
+      <div class="repos-modal__backdrop" data-detail-close></div>
+      <div class="repos-modal__content app-detail__content">
+        <button class="repos-modal__close" type="button" data-detail-close data-i18n-aria-label="modal.close" aria-label="Schließen">✕</button>
+        <div id="apps-detail-content"></div>
+      </div>
+    </div>
+  </body>
+</html>

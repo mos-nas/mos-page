@@ -2,9 +2,10 @@
   const storageKey = 'mos-landing-theme';
   const infoBarStorageKey = 'mos-info-bar-dismissed';
 
-  const base = (document.baseURI || window.location.href || '').endsWith('/')
-    ? (document.baseURI || window.location.href)
-    : (document.baseURI || window.location.href) + '/';
+  // Verzeichnis der aktuellen Seite ableiten – funktioniert fuer "/" und "/datei.html"
+  const base = (document.baseURI || window.location.href || '')
+    .replace(/[?#].*$/, '')
+    .replace(/[^/]*$/, '');
 
   const logos = {
     light: new URL('assets/mos-black.png', base).toString(),

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+
+    <title data-i18n="repos.page.title">Empfohlene Repositories – MOS</title>
+    <meta name="description" data-i18n-content="repos.subtitle" content="Empfohlene Template-Repositories für den MOS Hub." />
+
+    <link id="favicon" rel="icon" type="image/png" href="./assets/mos-black_square.png" />
+    <link id="apple-touch-icon" rel="apple-touch-icon" href="./assets/mos-black_square.png" />
+
+    <script>
+      // Modifier: ?format=json oder ?json -> direkt das JSON-Array ausliefern
+      (function () {
+        var p = new URLSearchParams(location.search);
+        var fmt = (p.get('format') || '').toLowerCase();
+        if (fmt === 'json' || p.has('json')) {
+          location.replace('recommended-repos.json' + location.hash);
+        }
+      })();
+    </script>
+
+    <link rel="stylesheet" href="./styles.css?v=2026-04-19-4" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <script src="./translations.js?v=2026-04-19-5"></script>
+    <script defer src="./script.js?v=2026-04-19-5"></script>
+    <script defer src="./repos-page.js?v=2026-04-19-5"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#repos" data-i18n="skipLink">Zum Inhalt springen</a>
+
+    <div class="apps-floating-controls">
+      <button
+        class="btn btn-ghost"
+        type="button"
+        data-action="toggle-language"
+        data-i18n-aria-label="header.language.ariaLabel"
+        data-i18n-title="header.language.title"
+        aria-label="Sprache umschalten"
+        title="Sprache"
+      >
+        <span class="icon" aria-hidden="true">🌐</span>
+        <span class="hide-sm" data-i18n="header.language">DE</span>
+      </button>
+      <button
+        class="btn btn-ghost"
+        type="button"
+        data-action="toggle-theme"
+        data-i18n-aria-label="header.theme.ariaLabel"
+        data-i18n-title="header.theme.title"
+        aria-label="Theme umschalten"
+        title="Theme"
+      >
+        <span class="icon" aria-hidden="true">◐</span>
+        <span class="hide-sm" data-i18n="header.theme">Theme</span>
+      </button>
+    </div>
+
+    <main class="apps-page">
+      <section id="repos" class="section">
+        <div class="container">
+          <div class="repos-hero">
+            <span class="brand-mark" aria-hidden="true">
+              <img
+                class="brand-logo repos-hero__logo"
+                data-logo
+                data-light="./assets/mos-black.png"
+                data-dark="./assets/mos-white.png"
+                src="./assets/mos-white.png"
+                data-i18n-alt="brand.alt"
+                alt="MOS"
+                decoding="async"
+              />
+            </span>
+            <h1 data-i18n="repos.title">Empfohlene Repositories</h1>
+            <p class="muted" data-i18n="repos.subtitle">Empfohlene Template-Repositories für den MOS Hub.</p>
+            <div class="repos-hero__actions">
+              <a class="btn btn-secondary" href="./apps.html" data-i18n="repos.toApps">Zu den Apps</a>
+              <a class="btn btn-primary" href="./recommended-repos.json" target="_blank" rel="noopener">
+                <span class="icon" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
+                <span data-i18n="repos.json">Als JSON</span>
+              </a>
+            </div>
+          </div>
+
+          <p class="muted small" id="repos-count" aria-live="polite"></p>
+          <div id="repos-status" class="apps-status" data-i18n="repos.loading">Lade Repositories…</div>
+          <ul id="repos-list" class="repos-grid" hidden></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <div class="container footer-inner">
+        <div>
+          <div class="footer-brand">MOS</div>
+          <div class="muted small">
+            ©
+            <span data-year></span>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="./index.html" data-i18n="nav.home">Startseite</a>
+          <a href="./apps.html" data-i18n="apps.viewAll">Alle Apps ansehen</a>
+          <a href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="footer.docs">Docs</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
