@@ -668,10 +668,6 @@ h1 {
   cursor: pointer;
   text-decoration: none;
 }
-.highlights .card.link:hover {
-  transform: translateY(-2px);
-  background: color-mix(in srgb, var(--surface) 98%, transparent);
-}
 .icon-badge {
   width: 2rem;
   height: 2rem;
@@ -755,6 +751,17 @@ h3 {
   border-radius: var(--radius);
   padding: 1rem;
   box-shadow: none;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.card h3,
+.panel h3,
+.card p,
+.panel p {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .card p,
@@ -1003,7 +1010,7 @@ code {
 
 @media (max-width: 640px) {
   .grid.cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 }
 .grid.three {
@@ -1012,8 +1019,9 @@ code {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 @media (max-width: 640px) {
+  .grid.two,
   .grid.three {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1250,11 +1258,10 @@ code {
   border-radius: var(--radius);
   background: transparent;
   overflow: hidden;
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .app-card:hover {
-  transform: translateY(-2px);
   border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
   background: color-mix(in srgb, var(--surface) 98%, transparent);
 }
@@ -1268,8 +1275,10 @@ code {
 }
 
 .app-card__media img {
+  width: auto;
+  height: auto;
   max-height: 56px;
-  max-width: 100%;
+  max-width: 56px;
   object-fit: contain;
 }
 

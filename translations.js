@@ -60,7 +60,7 @@ const translations = {
     'header.getStarted': 'Loslegen',
 
     // Announcement
-    'announcement.arm64.html': 'Neu: <strong>ARM64</strong> Build f\u00fcr MOS verf\u00fcgbar. <a href="https://github.com/ich777/mos-releases/releases" target="_blank" rel="noopener">Zu den Releases</a>',
+    'announcement.arm64.html': 'Neu: <strong>ARM64</strong> Build f\u00fcr MOS verf\u00fcgbar. <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Zu den Releases</a>',
 
     // Hero
     'hero.kicker': 'Self-hosted · Schnell · Übersichtlich',
@@ -176,6 +176,7 @@ const translations = {
     'opensource.license.link': 'Lizenz anzeigen',
     'opensource.contribute.title': 'Mitmachen',
     'opensource.contribute.text': 'Feedback, Issues und Beiträge helfen, MOS besser zu machen.',
+    'opensource.contribute.link': 'Zum Projekt auf GitHub',
 
     // Use Cases
     'usecases.nas.title': 'Homeserver / NAS',
@@ -204,13 +205,13 @@ const translations = {
       'MOS ist service‑orientiert: verfügbar sind u. a. Dashboard, Storage/Pools/Shares, Users, Docker‑Service, LXC‑Service, VM‑Service, Webterminal sowie optionale Module wie MOS Hub und MOS Notify. Welche Funktionen sichtbar sind, hängt von den aktivierten Services ab. Details zu einzelnen Diensten findest du in der Doku (z. B. <a href="https://docs.mos-official.net/docs/Virtualization/Docker-Service" target="_blank" rel="noopener">Docker</a>, <a href="https://docs.mos-official.net/docs/Virtualization/LXC-Service" target="_blank" rel="noopener">LXC</a>, <a href="https://docs.mos-official.net/docs/Virtualization/VM-Service" target="_blank" rel="noopener">VM</a>).',
     'faq.install.title': 'Wie installiere und betreibe ich MOS?',
     'faq.install.text':
-      'Lade das offizielle Release‑Image (siehe <a href="https://github.com/ich777/mos-releases/releases" target="_blank" rel="noopener">Releases</a>), schreibe es auf ein Bootmedium und boote das Zielsystem. Folge dem <a href="https://docs.mos-official.net/docs/Installation/Create-Bootable-Media" target="_blank" rel="noopener">Quick‑Start / Installation</a> in der Doku: Netzwerk konfigurieren, Storage‑Pool anlegen, Services aktivieren und erste Container/VMs starten. Die Web‑UI ist statisch; das Backend/Services müssen entsprechend eingerichtet sein (API, Notify).',
+      'Lade das offizielle Release‑Image (siehe <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Releases</a>), schreibe es auf ein Bootmedium und boote das Zielsystem. Folge dem <a href="https://docs.mos-official.net/docs/Installation/Create-Bootable-Media" target="_blank" rel="noopener">Quick‑Start / Installation</a> in der Doku: Netzwerk konfigurieren, Storage‑Pool anlegen, Services aktivieren und erste Container/VMs starten. Die Web‑UI ist statisch; das Backend/Services müssen entsprechend eingerichtet sein (API, Notify).',
     'faq.security.title': 'Wie wird Zugriff und Sicherheit gehandhabt?',
     'faq.security.text': 'MOS verwendet tokenbasierte Authentifizierung; für produktiven Einsatz empfiehlt sich ein Betrieb hinter TLS und einem Reverse Proxy. Folge den Prinzipien „Least Privilege“, halte System und Services aktuell und überwache Logs/Benachrichtigungen. Siehe auch: <a href="https://docs.mos-official.net/docs/System-Management/System-Configuration/System-Settings" target="_blank" rel="noopener">System‑Management</a>.',
     'faq.plugins.title': 'Wie funktionieren Plugins und Erweiterungen?',
     'faq.plugins.text': 'MOS ist modular aufgebaut: Plugins erweitern die Oberfläche und gegebenenfalls API‑Funktionen. Nur registrierte und aktivierte Plugins erscheinen in der UI; Installation/Management erfolgen über die jeweiligen Module und die Doku. Mehr dazu in der Dokumentation: <a href="https://docs.mos-official.net/docs/" target="_blank" rel="noopener">MOS Docs</a>.',
     'faq.updates.title': 'Wie bekomme ich Updates und pflege MOS?',
-    'faq.updates.text': 'Updates und Releases werden über das Projekt‑Repository / die Releases verteilt. Backend und UI können getrennt aktualisiert werden; die Doku beschreibt Update‑ und Rollback‑Verfahren. Release-Übersicht: <a href="https://github.com/ich777/mos-releases/releases" target="_blank" rel="noopener">Releases</a>.',
+    'faq.updates.text': 'Updates und Releases werden über das Projekt‑Repository / die Releases verteilt. Backend und UI können getrennt aktualisiert werden; die Doku beschreibt Update‑ und Rollback‑Verfahren. Release-Übersicht: <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Releases</a>.',
     'faq.opensource.title': 'Ist MOS Open Source?',
     'faq.opensource.text': 'Ja — MOS und die zugehörige Dokumentation sind Open Source. Siehe die LICENSE‑Datei im jeweiligen Repository für die konkrete Lizenzinformation: <a href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener">LICENSE</a>.',
     'faq.help.title': 'Wo finde ich Hilfe oder möchte beitragen?',
@@ -352,7 +353,7 @@ const translations = {
     'header.getStarted': 'Get Started',
 
     // Announcement
-    'announcement.arm64.html': 'New: <strong>ARM64</strong> build available for MOS. <a href="https://github.com/ich777/mos-releases/releases" target="_blank" rel="noopener">View releases</a>',
+    'announcement.arm64.html': 'New: <strong>ARM64</strong> build available for MOS. <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">View releases</a>',
 
     // Hero
     'hero.kicker': 'Self-hosted · Fast · Clear',
@@ -468,6 +469,7 @@ const translations = {
     'opensource.license.link': 'View license',
     'opensource.contribute.title': 'Contribute',
     'opensource.contribute.text': 'Feedback, issues and contributions help make MOS better.',
+    'opensource.contribute.link': 'View the project on GitHub',
 
     // Use Cases
     'usecases.nas.title': 'Home Server / NAS',
@@ -493,13 +495,13 @@ const translations = {
     'faq.services.title': 'Which services and platforms are supported?',
     'faq.services.text': 'MOS is service‑oriented: available services include Dashboard, Storage/Pools/Shares, Users, Docker service, LXC service, VM service, Web terminal and optional modules like MOS Hub and MOS Notify. Visible functionality depends on which services are enabled. See specific service docs (e.g. <a href="https://docs.mos-official.net/docs/Virtualization/Docker-Service" target="_blank" rel="noopener">Docker</a>, <a href="https://docs.mos-official.net/docs/Virtualization/LXC-Service" target="_blank" rel="noopener">LXC</a>, <a href="https://docs.mos-official.net/docs/Virtualization/VM-Service" target="_blank" rel="noopener">VM</a>).',
     'faq.install.title': 'How do I install and operate MOS?',
-    'faq.install.text': 'Download the official release image (see <a href="https://github.com/ich777/mos-releases/releases" target="_blank" rel="noopener">Releases</a>), write it to boot media and boot the target machine. Follow the <a href="https://docs.mos-official.net/docs/Installation/Create-Bootable-Media" target="_blank" rel="noopener">Quick Start / Installation</a> in the docs to configure networking, create a storage pool, enable services and start your first containers/VMs. The web UI is static; backend/services must be set up accordingly (API, Notify).',
+    'faq.install.text': 'Download the official release image (see <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Releases</a>), write it to boot media and boot the target machine. Follow the <a href="https://docs.mos-official.net/docs/Installation/Create-Bootable-Media" target="_blank" rel="noopener">Quick Start / Installation</a> in the docs to configure networking, create a storage pool, enable services and start your first containers/VMs. The web UI is static; backend/services must be set up accordingly (API, Notify).',
     'faq.security.title': 'How is access and security handled?',
     'faq.security.text': 'MOS uses token‑based authentication; for production use run it behind TLS and a reverse proxy. Follow least‑privilege principles, keep system/services updated and monitor logs and notifications. See: <a href="https://docs.mos-official.net/docs/System-Management/System-Configuration/System-Settings" target="_blank" rel="noopener">System Management</a>.',
     'faq.plugins.title': 'How do plugins and extensions work?',
     'faq.plugins.text': 'MOS is modular: plugins can extend the UI and, where applicable, API functionality. Only registered and enabled plugins appear in the UI; installation and management are covered in the documentation. More: <a href="https://docs.mos-official.net/docs/" target="_blank" rel="noopener">MOS Docs</a>.',
     'faq.updates.title': 'How do I get updates and maintain MOS?',
-    'faq.updates.text': 'Releases and updates are published on the project repositories. Backend and UI may be updated separately; consult the documentation for update and rollback procedures. Release overview: <a href="https://github.com/ich777/mos-releases/releases" target="_blank" rel="noopener">Releases</a>.',
+    'faq.updates.text': 'Releases and updates are published on the project repositories. Backend and UI may be updated separately; consult the documentation for update and rollback procedures. Release overview: <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Releases</a>.',
     'faq.opensource.title': 'Is MOS Open Source?',
     'faq.opensource.text': 'Yes — MOS and its documentation are open source. See the LICENSE file in the repository for details: <a href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener">LICENSE</a>.',
     'faq.help.title': 'Where can I find help or contribute?',
