@@ -63,10 +63,7 @@
         </a>
 
         <div class="header-actions">
-          <a class="github-stars" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" data-i18n-title="header.github.title" title="GitHub Stars">
-            <span class="github-stars__icon" aria-hidden="true"><i class="fa-brands fa-github"></i></span>
-            <span class="github-stars__count" id="github-stars-count">★</span>
-          </a>
+          <a href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" class="nav-link" id="gh-star-link"><i class="fa-brands fa-github"></i> ★ <span id="gh-star-count">-</span></a>
           <button
             class="btn btn-ghost"
             type="button"
@@ -144,5 +141,16 @@
         </div>
       </div>
     </footer>
+    <script>
+      fetch('https://api.github.com/repos/mos-nas/mos-releases')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var el = document.getElementById('gh-star-count');
+          if (el && typeof data.stargazers_count === 'number') {
+            el.textContent = data.stargazers_count;
+          }
+        })
+        .catch(function() {});
+    </script>
   </body>
 </html>

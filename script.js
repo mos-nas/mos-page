@@ -250,44 +250,4 @@
   } else {
     initCarousel();
   }
-
-  // Fetch and display GitHub stars
-  async function loadGitHubStars() {
-    try {
-      const starsElement = document.getElementById('github-stars-count');
-      if (!starsElement) return;
-
-      const response = await fetch('https://api.github.com/repos/mos-nas/mos-releases', {
-        headers: {
-          'Accept': 'application/vnd.github.v3+json'
-        }
-      });
-
-      if (!response.ok) throw new Error('Failed to fetch');
-
-      const data = await response.json();
-      const stars = data.stargazers_count;
-
-      // Format stars: 1234 -> "1.2k", 123 -> "123"
-      let displayStars = stars;
-      if (stars >= 1000) {
-        displayStars = (stars / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
-      }
-
-      starsElement.textContent = `★ ${displayStars}`;
-    } catch (error) {
-      // Fallback on error - just show star icon
-      const starsElement = document.getElementById('github-stars-count');
-      if (starsElement) {
-        starsElement.textContent = '★';
-      }
-    }
-  }
-
-  // Load GitHub stars when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadGitHubStars);
-  } else {
-    loadGitHubStars();
-  }
 })();

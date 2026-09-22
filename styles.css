@@ -395,6 +395,16 @@ a:hover {
   background: var(--surface2);
 }
 
+#gh-star-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+#gh-star-link i {
+  font-size: 1.2rem;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -1835,42 +1845,4 @@ code {
   margin-top: 1rem;
   width: 100%;
   justify-content: center;
-}
-
-/* GitHub Stars Button */
-.github-stars {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.4rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 650;
-  font-size: 0.85rem;
-  transition: background 180ms ease, box-shadow 180ms ease;
-  flex-shrink: 0;
-}
-
-.github-stars:hover {
-  background: var(--surface2);
-  text-decoration: none;
-}
-
-.github-stars:active {
-  transform: translateY(1px);
-}
-
-.github-stars__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 0.9rem;
-  font-size: 0.95rem;
-}
-
-.github-stars__count {
-  white-space: nowrap;
 }
