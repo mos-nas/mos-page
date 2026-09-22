@@ -243,9 +243,9 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  min-height: 72px;
-  padding: 0.9rem 0;
+  gap: 0.6rem;
+  min-height: 56px;
+  padding: 0.5rem 0;
   flex-wrap: nowrap;
 }
 
@@ -335,8 +335,8 @@ a:hover {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.35rem 0.6rem;
+  gap: 0.35rem;
+  padding: 0.25rem 0.4rem;
   border-radius: 999px;
   flex-shrink: 0;
   white-space: nowrap;
@@ -344,7 +344,7 @@ a:hover {
 
 .brand-logo {
   display: block;
-  height: 28px;
+  height: 24px;
   width: auto;
   object-fit: contain;
 }
@@ -366,8 +366,8 @@ a:hover {
 
 .nav {
   display: flex;
-  gap: 0.9rem;
-  padding: 0.2rem 0.4rem;
+  gap: 0.3rem;
+  padding: 0.15rem 0.25rem;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: color-mix(in srgb, var(--surface) 92%, transparent);
@@ -376,11 +376,12 @@ a:hover {
 }
 
 .nav-link {
-  padding: 0.45rem 0.6rem;
+  padding: 0.35rem 0.5rem;
   border-radius: 999px;
   color: var(--muted);
   white-space: nowrap;
   flex-shrink: 0;
+  font-size: 0.9rem;
 }
 
 .nav-link:hover {
@@ -389,23 +390,28 @@ a:hover {
   background: var(--surface2);
 }
 
+.nav-link.active {
+  color: var(--text);
+  background: var(--surface2);
+}
+
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.4rem;
   flex-wrap: nowrap;
   flex-shrink: 0;
 }
 
 /* Header buttons: slightly smaller than page CTAs */
 .site-header .header-actions .btn {
-  padding: 0.5rem 0.75rem;
-  font-size: 0.92rem;
-  gap: 0.45rem;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  gap: 0.3rem;
 }
 
 .site-header .header-actions .icon {
-  width: 1rem;
+  width: 0.9rem;
 }
 
 .btn {
@@ -1829,4 +1835,42 @@ code {
   margin-top: 1rem;
   width: 100%;
   justify-content: center;
+}
+
+/* GitHub Stars Button */
+.github-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 0.85rem;
+  transition: background 180ms ease, box-shadow 180ms ease;
+  flex-shrink: 0;
+}
+
+.github-stars:hover {
+  background: var(--surface2);
+  text-decoration: none;
+}
+
+.github-stars:active {
+  transform: translateY(1px);
+}
+
+.github-stars__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.9rem;
+  font-size: 0.95rem;
+}
+
+.github-stars__count {
+  white-space: nowrap;
 }

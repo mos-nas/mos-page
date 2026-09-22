@@ -45,6 +45,7 @@ const translations = {
     'nav.ariaLabel': 'Hauptnavigation',
     'nav.features': 'Features',
     'nav.apps': 'Apps',
+    'nav.repos': 'Repositories',
     'nav.api': 'API',
     'nav.opensource': 'Open Source',
     'nav.usecases': 'Use Cases',
@@ -52,12 +53,19 @@ const translations = {
     'nav.faq': 'FAQ',
 
     // Header
+    'brand.ariaLabel': 'MOS Start',
     'header.theme': 'Theme',
     'header.theme.ariaLabel': 'Theme umschalten',
     'header.theme.title': 'Theme',
     'header.language.ariaLabel': 'Sprache umschalten',
     'header.language.title': 'Sprache',
+    'header.language': 'DE',
     'header.getStarted': 'Loslegen',
+    'header.github.title': 'GitHub Stars',
+
+    // Info Bar
+    'infoBar.close.ariaLabel': 'Hinweis schließen',
+    'infoBar.close.title': 'Schließen',
 
     // Announcement
     'announcement.arm64.html': 'Neu: <strong>ARM64</strong> Build f\u00fcr MOS verf\u00fcgbar. <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Zu den Releases</a>',
@@ -73,7 +81,9 @@ const translations = {
     'hero.chip2.text': 'REST + WebSocket',
     'hero.chip3.strong': 'Open Source',
     'hero.chip3.text': 'AGPLv3',
-    'header.language': 'DE',
+    'hero.chips.ariaLabel': 'Kernpunkte',
+    'hero.bullets.ariaLabel': 'Kurzvorteile',
+    'hero.preview.ariaLabel': 'Vorschau',
     'hero.docs': 'Dokumentation',
     'hero.bullet1': 'Keine versteckten Services',
     'hero.bullet2': 'Keine Telemetrie',
@@ -193,13 +203,16 @@ const translations = {
     'section.partners.subtitle': 'Projektpartner und unterstützende Organisationen',
     'partners.devuan': 'Devuan',
     'partners.weblate': 'Weblate',
+    'carousel.partners.ariaLabel': 'Partner-Logos',
+    'carousel.prev.ariaLabel': 'Vorheriges Partner-Logo',
+    'carousel.next.ariaLabel': 'Nächstes Partner-Logo',
 
     // FAQ
     'faq.what.title': 'Was ist MOS?',
     'faq.what.text':
       'MOS ist ein leichtgewichtiges, Devuan‑basiertes Betriebssystem für Homelabs und kleine Server. Die Web‑UI ist ein Client der MOS‑API und bildet System‑Monitoring, Storage/Pools, Benutzerverwaltung, Container (Docker, LXC) und virtuelle Maschinen ab. Mehr dazu in der Doku: <a href="https://docs.mos-official.net/docs/Quick-Start/WebUI-Overview" target="_blank" rel="noopener">WebUI‑Overview</a>.',
     'faq.arm64.title': 'Gibt es einen ARM64 Build?',
-    'faq.arm64.text': 'Ja — ARM64 Builds sind verfügbar, aber aktuell noch experimentell.',
+    'faq.arm64.text': 'Ja - mittlerweile ebenfalls stabil verfügbar.',
     'faq.services.title': 'Welche Dienste und Plattformen werden unterstützt?',
     'faq.services.text':
       'MOS ist service‑orientiert: verfügbar sind u. a. Dashboard, Storage/Pools/Shares, Users, Docker‑Service, LXC‑Service, VM‑Service, Webterminal sowie optionale Module wie MOS Hub und MOS Notify. Welche Funktionen sichtbar sind, hängt von den aktivierten Services ab. Details zu einzelnen Diensten findest du in der Doku (z. B. <a href="https://docs.mos-official.net/docs/Virtualization/Docker-Service" target="_blank" rel="noopener">Docker</a>, <a href="https://docs.mos-official.net/docs/Virtualization/LXC-Service" target="_blank" rel="noopener">LXC</a>, <a href="https://docs.mos-official.net/docs/Virtualization/VM-Service" target="_blank" rel="noopener">VM</a>).',
@@ -338,6 +351,7 @@ const translations = {
     'nav.ariaLabel': 'Main navigation',
     'nav.features': 'Features',
     'nav.apps': 'Apps',
+    'nav.repos': 'Repositories',
     'nav.api': 'API',
     'nav.opensource': 'Open Source',
     'nav.usecases': 'Use Cases',
@@ -345,12 +359,19 @@ const translations = {
     'nav.faq': 'FAQ',
 
     // Header
+    'brand.ariaLabel': 'MOS Start',
     'header.theme': 'Theme',
     'header.theme.ariaLabel': 'Toggle theme',
     'header.theme.title': 'Theme',
     'header.language.ariaLabel': 'Toggle language',
     'header.language.title': 'Language',
+    'header.language': 'EN',
     'header.getStarted': 'Get Started',
+    'header.github.title': 'GitHub Stars',
+
+    // Info Bar
+    'infoBar.close.ariaLabel': 'Close notification',
+    'infoBar.close.title': 'Close',
 
     // Announcement
     'announcement.arm64.html': 'New: <strong>ARM64</strong> build available for MOS. <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">View releases</a>',
@@ -366,7 +387,9 @@ const translations = {
     'hero.chip2.text': 'REST + WebSocket',
     'hero.chip3.strong': 'Open Source',
     'hero.chip3.text': 'AGPLv3',
-    'header.language': 'EN',
+    'hero.chips.ariaLabel': 'Key points',
+    'hero.bullets.ariaLabel': 'Quick advantages',
+    'hero.preview.ariaLabel': 'Preview',
     'hero.docs': 'Documentation',
     'hero.bullet1': 'No hidden services',
     'hero.bullet2': 'No telemetry',
@@ -486,12 +509,15 @@ const translations = {
     'section.partners.subtitle': 'Project partners and supporting organizations',
     'partners.devuan': 'Devuan',
     'partners.weblate': 'Weblate',
+    'carousel.partners.ariaLabel': 'Partner logos',
+    'carousel.prev.ariaLabel': 'Previous partner logo',
+    'carousel.next.ariaLabel': 'Next partner logo',
 
     // FAQ
     'faq.what.title': 'What is MOS?',
     'faq.what.text': 'MOS is a lightweight, Devuan‑based operating system for homelabs and small servers. The web UI is a client to the MOS API and covers system monitoring, storage/pools, user management, containers (Docker, LXC) and virtual machines. See the docs: <a href="https://docs.mos-official.net/docs/Quick-Start/WebUI-Overview" target="_blank" rel="noopener">WebUI Overview</a>.',
     'faq.arm64.title': 'Is there an ARM64 build?',
-    'faq.arm64.text': 'Yes — ARM64 builds are available, but they are still experimental.',
+    'faq.arm64.text': 'Yes — ARM64 builds are available and are now considered stable.',
     'faq.services.title': 'Which services and platforms are supported?',
     'faq.services.text': 'MOS is service‑oriented: available services include Dashboard, Storage/Pools/Shares, Users, Docker service, LXC service, VM service, Web terminal and optional modules like MOS Hub and MOS Notify. Visible functionality depends on which services are enabled. See specific service docs (e.g. <a href="https://docs.mos-official.net/docs/Virtualization/Docker-Service" target="_blank" rel="noopener">Docker</a>, <a href="https://docs.mos-official.net/docs/Virtualization/LXC-Service" target="_blank" rel="noopener">LXC</a>, <a href="https://docs.mos-official.net/docs/Virtualization/VM-Service" target="_blank" rel="noopener">VM</a>).',
     'faq.install.title': 'How do I install and operate MOS?',

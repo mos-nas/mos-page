@@ -31,32 +31,68 @@
   <body>
     <a class="skip-link" href="#repos" data-i18n="skipLink">Zum Inhalt springen</a>
 
-    <div class="apps-floating-controls">
-      <button
-        class="btn btn-ghost"
-        type="button"
-        data-action="toggle-language"
-        data-i18n-aria-label="header.language.ariaLabel"
-        data-i18n-title="header.language.title"
-        aria-label="Sprache umschalten"
-        title="Sprache"
-      >
-        <span class="icon" aria-hidden="true">🌐</span>
-        <span class="hide-sm" data-i18n="header.language">DE</span>
-      </button>
-      <button
-        class="btn btn-ghost"
-        type="button"
-        data-action="toggle-theme"
-        data-i18n-aria-label="header.theme.ariaLabel"
-        data-i18n-title="header.theme.title"
-        aria-label="Theme umschalten"
-        title="Theme"
-      >
-        <span class="icon" aria-hidden="true">◐</span>
-        <span class="hide-sm" data-i18n="header.theme">Theme</span>
-      </button>
-    </div>
+    <header class="site-header" role="banner">
+      <div class="info-bar" role="note" data-dismissible-info-bar hidden>
+        <div class="container info-bar__inner">
+          <p class="info-bar__text" data-i18n-html="announcement.arm64.html">
+            Neu: <strong>ARM64</strong> Build für MOS verfügbar. <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Zu den Releases</a>
+          </p>
+        </div>
+        <button class="info-bar__close" type="button" data-action="close-info-bar" data-i18n-aria-label="infoBar.close.ariaLabel" data-i18n-title="infoBar.close.title" aria-label="Hinweis schließen" title="Schließen">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
+
+      <div class="container header-inner">
+        <a class="brand" href="./index.html" data-i18n-aria-label="brand.ariaLabel" aria-label="MOS Start">
+          <span class="brand-mark" aria-hidden="true">
+            <img
+              class="brand-logo"
+              data-logo
+              data-light="./assets/mos-black.png"
+              data-dark="./assets/mos-white.png"
+              src="./assets/mos-white.png"
+              data-i18n-alt="brand.alt"
+              alt="MOS"
+              height="24"
+              style="height: 24px; width: auto"
+              decoding="async"
+            />
+          </span>
+          <span class="brand-text"></span>
+        </a>
+
+        <div class="header-actions">
+          <a class="github-stars" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" data-i18n-title="header.github.title" title="GitHub Stars">
+            <span class="github-stars__icon" aria-hidden="true"><i class="fa-brands fa-github"></i></span>
+            <span class="github-stars__count" id="github-stars-count">★</span>
+          </a>
+          <button
+            class="btn btn-ghost"
+            type="button"
+            data-action="toggle-language"
+            data-i18n-aria-label="header.language.ariaLabel"
+            data-i18n-title="header.language.title"
+            aria-label="Sprache umschalten"
+            title="Sprache"
+          >
+            <span class="icon" aria-hidden="true">🌐</span>
+            <span class="hide-sm" data-i18n="header.language">DE</span>
+          </button>
+          <button
+            class="btn btn-ghost"
+            type="button"
+            data-action="toggle-theme"
+            data-i18n-aria-label="header.theme.ariaLabel"
+            data-i18n-title="header.theme.title"
+            aria-label="Theme umschalten"
+            title="Theme"
+          >
+            <span class="icon" aria-hidden="true">◐</span>
+          </button>
+        </div>
+      </div>
+    </header>
 
     <main class="apps-page">
       <section id="repos" class="section">

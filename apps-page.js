@@ -14,7 +14,7 @@
   const sortSelect = document.getElementById('apps-sort');
   const summary = document.getElementById('apps-summary');
   const pager = document.getElementById('apps-pagination');
-  const reposBtn = document.getElementById('apps-repos-btn');
+  const reposBtn = document.getElementById('apps-repos-btn') || document.getElementById('apps-repos-btn-float');
   const reposModal = document.getElementById('apps-repos-modal');
   const reposList = document.getElementById('apps-repos-list');
   const reposCount = document.getElementById('apps-repos-count');

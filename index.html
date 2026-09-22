@@ -52,13 +52,13 @@
             Neu: <strong>ARM64</strong> Build für MOS verfügbar. <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Zu den Releases</a>
           </p>
         </div>
-        <button class="info-bar__close" type="button" data-action="close-info-bar" aria-label="Hinweis schließen" title="Schließen">
+        <button class="info-bar__close" type="button" data-action="close-info-bar" data-i18n-aria-label="infoBar.close.ariaLabel" data-i18n-title="infoBar.close.title" aria-label="Hinweis schließen" title="Schließen">
           <span aria-hidden="true">✕</span>
         </button>
       </div>
 
       <div class="container header-inner">
-        <a class="brand" href="#top" aria-label="MOS Start">
+        <a class="brand" href="#top" data-i18n-aria-label="brand.ariaLabel" aria-label="MOS Start">
           <span class="brand-mark" aria-hidden="true">
             <img
               class="brand-logo"
@@ -68,12 +68,12 @@
               src="./assets/mos-white.png"
               data-i18n-alt="brand.alt"
               alt="MOS"
-              height="28"
-              style="height: 28px; width: auto"
+              height="24"
+              style="height: 24px; width: auto"
               decoding="async"
             />
           </span>
-          <span class="brand-text">MOS</span>
+          <span class="brand-text"></span>
         </a>
 
         <nav class="nav" data-i18n-aria-label="nav.ariaLabel" aria-label="Hauptnavigation">
@@ -87,6 +87,10 @@
         </nav>
 
         <div class="header-actions">
+          <a class="github-stars" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" data-i18n-title="header.github.title" title="GitHub Stars">
+            <span class="github-stars__icon" aria-hidden="true"><i class="fa-brands fa-github"></i></span>
+            <span class="github-stars__count" id="github-stars-count">★</span>
+          </a>
           <button
             class="btn btn-ghost"
             type="button"
@@ -109,7 +113,6 @@
             title="Theme"
           >
             <span class="icon" aria-hidden="true">◐</span>
-            <span class="hide-sm" data-i18n="header.theme">Theme</span>
           </button>
           <a class="btn btn-primary" href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="header.getStarted">Loslegen</a>
         </div>
@@ -185,7 +188,7 @@
               Devuan‑basiert und ressourcenschonend: Web‑UI mit Monitoring, Storage &amp; Shares, Users, Netzwerk, Benachrichtigungen, Webterminal sowie Docker, LXC, VMs – modular erweiterbar.
             </p>
 
-            <div class="chips" aria-label="Kernpunkte">
+            <div class="chips" data-i18n-aria-label="hero.chips.ariaLabel" aria-label="Kernpunkte">
               <span class="chip">
                 <strong data-i18n="hero.chip1.strong">Modernes UI</strong>
                 ·
@@ -208,7 +211,7 @@
               <a class="btn btn-secondary" href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="hero.docs">Dokumentation</a>
             </div>
 
-            <ul class="hero-bullets" aria-label="Kurzvorteile">
+            <ul class="hero-bullets" data-i18n-aria-label="hero.bullets.ariaLabel" aria-label="Kurzvorteile">
               <li data-i18n="hero.bullet1">Keine versteckten Services</li>
               <li data-i18n="hero.bullet2">Keine Telemetrie</li>
               <li data-i18n="hero.bullet3">Keine erzwungenen Cloud Services oder Abhängigkeiten</li>
@@ -216,7 +219,7 @@
             </ul>
           </div>
 
-          <div class="hero-card" aria-label="Vorschau">
+          <div class="hero-card" data-i18n-aria-label="hero.preview.ariaLabel" aria-label="Vorschau">
             <img
               id="mos-screenshot-thumb"
               data-screenshot
@@ -558,7 +561,7 @@
           </div>
 
           <div class="carousel-wrapper">
-            <div class="carousel" role="region" aria-label="Partner-Logos">
+            <div class="carousel" role="region" data-i18n-aria-label="carousel.partners.ariaLabel" aria-label="Partner-Logos">
               <div class="carousel-container">
                 <div class="carousel-item">
                   <img 
@@ -582,10 +585,10 @@
                 </div>
               </div>
             </div>
-            <button class="carousel-btn carousel-btn--prev" data-action="carousel-prev" aria-label="Vorheriges Partner-Logo">
+            <button class="carousel-btn carousel-btn--prev" data-action="carousel-prev" data-i18n-aria-label="carousel.prev.ariaLabel" aria-label="Vorheriges Partner-Logo">
               <span aria-hidden="true">‹</span>
             </button>
-            <button class="carousel-btn carousel-btn--next" data-action="carousel-next" aria-label="Nächstes Partner-Logo">
+            <button class="carousel-btn carousel-btn--next" data-action="carousel-next" data-i18n-aria-label="carousel.next.ariaLabel" aria-label="Nächstes Partner-Logo">
               <span aria-hidden="true">›</span>
             </button>
           </div>
@@ -607,7 +610,7 @@
             </details>
             <details>
               <summary data-i18n="faq.arm64.title">Gibt es einen ARM64 Build?</summary>
-              <p data-i18n="faq.arm64.text">Ja — ARM64 Builds sind verfügbar, aber aktuell noch experimentell.</p>
+              <p data-i18n="faq.arm64.text">Ja - mittlerweile ebenfalls stabil verfügbar.</p>
             </details>
             <details>
               <summary data-i18n="faq.services.title">Welche Dienste und Plattformen werden unterstützt?</summary>
