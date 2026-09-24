@@ -232,8 +232,6 @@ a:hover {
   background: color-mix(in srgb, var(--header-footer-bg) 82%, transparent);
   border-bottom: none;
   box-shadow: none;
-  /* Prevent decorative pseudo-elements from overlapping the page content */
-  overflow: hidden;
 }
 
 .site-header::after {
@@ -422,6 +420,88 @@ a:hover {
 
 .site-header .header-actions .icon {
   width: 0.9rem;
+}
+
+/* Language Dropdown */
+.language-dropdown {
+  position: relative;
+}
+
+.language-toggle {
+  gap: 0.25rem;
+}
+
+.language-toggle .flag {
+  font-size: 1.1rem;
+}
+
+.language-toggle .lang-code {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.language-toggle .dropdown-icon {
+  font-size: 0.65rem;
+  margin-left: 0.1rem;
+}
+
+.language-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 200px;
+  margin-top: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--elev-2);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.language-menu[hidden] {
+  display: none;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.language-option:hover,
+.language-option:focus {
+  background: var(--surface2);
+  outline: none;
+}
+
+.language-option[aria-current="page"] {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  font-weight: 600;
+}
+
+.language-option .flag {
+  font-size: 1.3rem;
+  min-width: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-option .lang-code {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
 }
 
 .btn {

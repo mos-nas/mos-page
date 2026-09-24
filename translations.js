@@ -22,12 +22,9 @@ const LEGAL_INFO = {
 // ============================================================
 
 // Verfügbare Sprachen mit Anzeigenamen
-const languages = {
-  de: { name: 'Deutsch', code: 'DE' },
-  en: { name: 'English', code: 'EN' },
-  // Neue Sprachen einfach hier hinzufügen:
-  // fr: { name: 'Français', code: 'FR' },
-  // es: { name: 'Español', code: 'ES' },
+window.languages = {
+  de: { name: 'Deutsch', flag: '🇩🇪', code: 'DE' },
+  en: { name: 'English', flag: '🇬🇧', code: 'EN' },
 };
 
 const translations = {
@@ -59,9 +56,13 @@ const translations = {
     'header.theme.title': 'Theme',
     'header.language.ariaLabel': 'Sprache umschalten',
     'header.language.title': 'Sprache',
-    'header.language': 'DE',
+    'header.language': 'Deutsch',
     'header.getStarted': 'Loslegen',
     'header.github.title': 'GitHub Stars',
+
+    // Languages
+    'languages.de': 'Deutsch',
+    'languages.en': 'English',
 
     // Info Bar
     'infoBar.close.ariaLabel': 'Hinweis schließen',
@@ -365,9 +366,13 @@ const translations = {
     'header.theme.title': 'Theme',
     'header.language.ariaLabel': 'Toggle language',
     'header.language.title': 'Language',
-    'header.language': 'EN',
+    'header.language': 'English',
     'header.getStarted': 'Get Started',
     'header.github.title': 'GitHub Stars',
+
+    // Languages
+    'languages.de': 'Deutsch',
+    'languages.en': 'English',
 
     // Info Bar
     'infoBar.close.ariaLabel': 'Close notification',
@@ -750,7 +755,7 @@ function setLanguage(lang) {
 
 // Verfügbare Sprachen als Array (für einfaches Durchlaufen)
 function getAvailableLanguages() {
-  return Object.keys(languages).filter((lang) => translations[lang]);
+  return Object.keys(window.languages).filter((lang) => translations[lang]);
 }
 
 // Nächste Sprache in der Liste finden
@@ -811,8 +816,7 @@ function initLanguage() {
 
 // Sprachumschalter-Text aktualisieren
 function updateLanguageButton(lang) {
-  const langBtn = document.querySelector('[data-action="toggle-language"] .hide-sm');
-  if (langBtn && languages[lang]) {
-    langBtn.textContent = languages[lang].code;
+  if (typeof window.updateLanguageDisplay === 'function') {
+    window.updateLanguageDisplay(lang);
   }
 }

@@ -21,17 +21,6 @@
     <a class="skip-link" href="#apps" data-i18n="skipLink">Zum Inhalt springen</a>
 
     <header class="site-header" role="banner">
-      <div class="info-bar" role="note" data-dismissible-info-bar hidden>
-        <div class="container info-bar__inner">
-          <p class="info-bar__text" data-i18n-html="announcement.arm64.html">
-            Neu: <strong>ARM64</strong> Build für MOS verfügbar. <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Zu den Releases</a>
-          </p>
-        </div>
-        <button class="info-bar__close" type="button" data-action="close-info-bar" data-i18n-aria-label="infoBar.close.ariaLabel" data-i18n-title="infoBar.close.title" aria-label="Hinweis schließen" title="Schließen">
-          <span aria-hidden="true">✕</span>
-        </button>
-      </div>
-
       <div class="container header-inner">
         <a class="brand" href="./index.html" data-i18n-aria-label="brand.ariaLabel" aria-label="MOS Start">
           <span class="brand-mark" aria-hidden="true">
@@ -52,19 +41,11 @@
         </a>
 
         <div class="header-actions">
-          <a href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" class="nav-link" id="gh-star-link"><i class="fa-brands fa-github"></i> ★ <span id="gh-star-count">-</span></a>
-          <button
-            class="btn btn-ghost"
-            type="button"
-            data-action="toggle-language"
-            data-i18n-aria-label="header.language.ariaLabel"
-            data-i18n-title="header.language.title"
-            aria-label="Sprache umschalten"
-            title="Sprache"
-          >
-            <span class="icon" aria-hidden="true">🌐</span>
-            <span class="hide-sm" data-i18n="header.language">DE</span>
-          </button>
+          <a href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" class="nav-link" id="gh-star-link">
+            <i class="fa-brands fa-github"></i>
+            ★
+            <span id="gh-star-count">-</span>
+          </a>
           <button
             class="btn btn-ghost"
             type="button"
@@ -76,6 +57,33 @@
           >
             <span class="icon" aria-hidden="true">◐</span>
           </button>
+          <div class="language-dropdown">
+            <button
+              class="btn btn-ghost language-toggle"
+              type="button"
+              onclick="window.toggleLanguageMenu()"
+              data-i18n-aria-label="header.language.ariaLabel"
+              data-i18n-title="header.language.title"
+              aria-label="Sprache umschalten"
+              title="Sprache"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="flag" aria-hidden="true">🇩🇪</span>
+              <span class="lang-code" aria-hidden="true">DE</span>
+              <span class="dropdown-icon" aria-hidden="true">▼</span>
+            </button>
+            <div class="language-menu" hidden>
+              <button class="language-option" data-lang="de" aria-current="page" type="button" onclick="window.selectLanguage('de')">
+                <span class="flag">🇩🇪</span>
+                <span class="lang-code">DE</span>
+              </button>
+              <button class="language-option" data-lang="en" type="button" onclick="window.selectLanguage('en')">
+                <span class="flag">🇬🇧</span>
+                <span class="lang-code">EN</span>
+              </button>
+            </div>
+          </div>
           <button
             id="apps-repos-btn"
             class="btn btn-ghost"
@@ -104,14 +112,7 @@
           <div class="apps-toolbar">
             <div class="apps-search">
               <i class="fa-solid fa-magnifying-glass apps-search__icon" aria-hidden="true"></i>
-              <input
-                id="apps-search"
-                type="search"
-                class="apps-search__input"
-                data-i18n-placeholder="apps.search.placeholder"
-                placeholder="Apps durchsuchen…"
-                autocomplete="off"
-              />
+              <input id="apps-search" type="search" class="apps-search__input" data-i18n-placeholder="apps.search.placeholder" placeholder="Apps durchsuchen…" autocomplete="off" />
             </div>
             <select id="apps-sort" class="apps-select" data-i18n-aria-label="apps.sort.label" aria-label="Sortierung">
               <option value="date_desc" data-i18n="apps.sort.dateDesc">Neueste zuerst</option>
@@ -171,14 +172,16 @@
     </div>
     <script>
       fetch('https://api.github.com/repos/mos-nas/mos-releases')
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (data) {
           var el = document.getElementById('gh-star-count');
           if (el && typeof data.stargazers_count === 'number') {
             el.textContent = data.stargazers_count;
           }
         })
-        .catch(function() {});
+        .catch(function () {});
     </script>
   </body>
 </html>
