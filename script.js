@@ -1,317 +1,136 @@
 (function () {
-  const storageKey = 'mos-landing-theme';
-  const infoBarStorageKey = 'mos-info-bar-dismissed';
+  const THEME_KEY = 'mos-landing-theme';
+  const root = document.documentElement;
 
-  // Verzeichnis der aktuellen Seite ableiten – funktioniert fuer "/" und "/datei.html"
-  const base = (document.baseURI || window.location.href || '')
-    .replace(/[?#].*$/, '')
-    .replace(/[^/]*$/, '');
-
-  const logos = {
-    light: new URL('assets/mos-black.png', base).toString(),
-    dark: new URL('assets/mos-white.png', base).toString(),
-  };
-
-  const dashboards = {
-    light: new URL('assets/dashboard_light.png', base).toString(),
-    dark: new URL('assets/dashboard_dark.png', base).toString(),
-  };
-
-  const favicons = {
-    light: new URL('assets/mos-black_square.png', base).toString(),
-    dark: new URL('assets/mos-white_square.png', base).toString(),
-  };
-
-  function getPreferredTheme() {
-    const stored = localStorage.getItem(storageKey);
-    if (stored === 'light' || stored === 'dark') return stored;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  }
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem(storageKey, theme);
-    
-    // Logo aktualisieren
-    const logoEl = document.querySelector('[data-logo]');
-    if (logoEl && logoEl instanceof HTMLImageElement) {
-      const next = logos[theme] || logos.dark;
-      // Set both to avoid odd caching behavior on some setups.
-      logoEl.src = next;
-      logoEl.srcset = next;
-    }
-    
-    // Dashboard-Bilder aktualisieren
-    document.querySelectorAll('[data-screenshot]').forEach(img => {
-      if (img instanceof HTMLImageElement) {
-        const next = dashboards[theme] || dashboards.dark;
-        img.src = next;
-        img.srcset = next;
-      }
-    });
-    
-    // Favicon aktualisieren
-    const faviconEl = document.getElementById('favicon');
-    const appleTouchIconEl = document.getElementById('apple-touch-icon');
-    const nextFavicon = favicons[theme] || favicons.dark;
-    if (faviconEl) {
-      faviconEl.href = nextFavicon;
-    }
-    if (appleTouchIconEl) {
-      appleTouchIconEl.href = nextFavicon;
+  function storedTheme() {
+    try {
+      const value = localStorage.getItem(THEME_KEY);
+      return value === 'light' || value === 'dark' ? value : null;
+    } catch {
+      return null;
     }
   }
 
-  function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
-    applyTheme(current === 'dark' ? 'light' : 'dark');
+  function systemTheme() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
-  function smoothScrollTo(hash) {
-    const el = document.querySelector(hash);
-    if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  function applyTheme(theme, persist) {
+    root.setAttribute('data-theme', theme);
+    if (!persist) return;
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {}
   }
 
-  function closeInfoBar(saveState = true) {
-    const infoBar = document.querySelector('[data-dismissible-info-bar]');
-    if (!infoBar) return;
-    infoBar.classList.add('is-hidden');
-    if (saveState) {
-      localStorage.setItem(infoBarStorageKey, '1');
-    }
-  }
+  applyTheme(storedTheme() || systemTheme(), false);
 
-  // Init
-  applyTheme(getPreferredTheme());
-
-  if (localStorage.getItem(infoBarStorageKey) === '1') {
-    closeInfoBar(false);
-  }
-
-  // Auf System-Theme-Änderungen reagieren (wenn keine gespeicherte Präferenz vorhanden ist)
   if (window.matchMedia) {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => {
-      const stored = localStorage.getItem(storageKey);
-      // Nur auf System-Änderungen reagieren, wenn keine Präferenz gespeichert ist
-      if (!stored) {
-        applyTheme(mq.matches ? 'dark' : 'light');
-      }
+    const query = window.matchMedia('(prefers-color-scheme: dark)');
+    const onChange = () => {
+      if (!storedTheme()) applyTheme(query.matches ? 'dark' : 'light', false);
     };
-    if (mq.addEventListener) {
-      mq.addEventListener('change', handleChange);
-    } else if (mq.addListener) {
-      mq.addListener(handleChange);
-    }
+    if (query.addEventListener) query.addEventListener('change', onChange);
   }
 
-  const yearEl = document.querySelector('[data-year]');
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  const header = document.querySelector('.site-header');
+  const menuButton = document.querySelector('[data-action="toggle-menu"]');
 
-  // i18n initialisieren
-  if (typeof initLanguage === 'function') {
-    initLanguage();
+  function setMenu(open) {
+    if (!header || !menuButton) return;
+    if (open) {
+      header.setAttribute('data-open', '');
+    } else {
+      header.removeAttribute('data-open');
+    }
+    menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
-  window.toggleLanguageMenu = function() {
-    const dropdown = document.querySelector('.language-dropdown');
-    const menu = dropdown?.querySelector('.language-menu');
-    const button = dropdown?.querySelector('.language-toggle');
-    if (!menu || !button) return;
-    
-    const isOpen = !menu.hidden;
-    menu.hidden = isOpen;
-    button.setAttribute('aria-expanded', !isOpen);
-  };
-
-  window.closeLanguageMenu = function() {
-    const dropdown = document.querySelector('.language-dropdown');
-    const menu = dropdown?.querySelector('.language-menu');
-    const button = dropdown?.querySelector('.language-toggle');
-    if (!menu || !button) return;
-    
-    menu.hidden = true;
-    button.setAttribute('aria-expanded', false);
-  };
-
-  window.selectLanguage = function(lang) {
-    if (typeof setLanguage === 'function') {
-      setLanguage(lang);
-      window.closeLanguageMenu();
-    }
-  };
-
-  window.updateLanguageDisplay = function(lang) {
-    const button = document.querySelector('.language-toggle');
-    const flagSpan = button?.querySelector('.flag');
-    const codeSpan = button?.querySelector('.lang-code');
-    const dropdown = document.querySelector('.language-dropdown');
-    const options = dropdown?.querySelectorAll('.language-option');
-    
-    if (window.languages && window.languages[lang]) {
-      if (flagSpan) flagSpan.textContent = window.languages[lang].flag;
-      if (codeSpan) codeSpan.textContent = window.languages[lang].code;
-      
-      options?.forEach(opt => {
-        if (opt.getAttribute('data-lang') === lang) {
-          opt.setAttribute('aria-current', 'page');
-        } else {
-          opt.removeAttribute('aria-current');
-        }
-      });
-    }
-  };
-
-  document.addEventListener('click', (e) => {
-    const target = e.target instanceof Element ? e.target.closest('[data-action]') : null;
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
 
-    const action = target.getAttribute('data-action');
-
-    if (action === 'toggle-theme') {
-      e.preventDefault();
-      toggleTheme();
+    const themeButton = target.closest('[data-action="toggle-theme"]');
+    if (themeButton) {
+      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
       return;
     }
 
-    if (action === 'toggle-language-menu') {
-      e.preventDefault();
-      window.toggleLanguageMenu();
+    if (target.closest('[data-action="toggle-menu"]')) {
+      setMenu(!header.hasAttribute('data-open'));
       return;
     }
 
-    if (action === 'close-info-bar') {
-      e.preventDefault();
-      closeInfoBar(true);
+    if (header && header.hasAttribute('data-open') && target.closest('.nav a')) {
+      setMenu(false);
+    }
+
+    const langButton = target.closest('.lang [data-lang]');
+    if (langButton && typeof setLanguage === 'function') {
+      setLanguage(langButton.getAttribute('data-lang'));
       return;
     }
 
-    if (action === 'scroll') {
-      const href = target.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        e.preventDefault();
-        smoothScrollTo(href);
-      }
+    const opener = target.closest('[data-dialog-open]');
+    if (opener) {
+      const dialog = document.getElementById(opener.getAttribute('data-dialog-open'));
+      if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
       return;
     }
 
-    if (action === 'open-app') {
-      // Default: go to repo root (MOS app)
-      // If you deploy this page elsewhere, change the href in index.html.
+    const closer = target.closest('[data-dialog-close]');
+    if (closer) {
+      const dialog = closer.closest('dialog');
+      if (dialog) dialog.close();
       return;
     }
 
-    if (action === 'open-imprint') {
-      e.preventDefault();
-      openModal('imprint-modal');
-      return;
-    }
-
-    if (action === 'open-privacy') {
-      e.preventDefault();
-      openModal('privacy-modal');
-      return;
-    }
-
-    if (action === 'close-modal') {
-      e.preventDefault();
-      const modal = target.closest('.legal-modal');
-      if (modal) closeModal(modal.id);
-      return;
+    if (target instanceof HTMLDialogElement && target.hasAttribute('data-backdrop-close')) {
+      target.close();
     }
   });
 
-  // Language option selection
-  document.addEventListener('click', (e) => {
-    const langOption = e.target instanceof Element ? e.target.closest('.language-option') : null;
-    if (langOption) {
-      const lang = langOption.getAttribute('data-lang');
-      if (lang) {
-        window.selectLanguage(lang);
-      }
-    }
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenu(false);
   });
 
-  // Close language menu when clicking outside
-  document.addEventListener('click', (e) => {
-    const dropdown = document.querySelector('.language-dropdown');
-    if (!dropdown) return;
-    
-    const menu = dropdown.querySelector('.language-menu');
-    
-    if (menu && !menu.hidden && !dropdown.contains(e.target)) {
-      window.closeLanguageMenu();
-    }
+  window.updateLanguageDisplay = function (lang) {
+    document.querySelectorAll('.lang [data-lang]').forEach((button) => {
+      button.setAttribute('aria-pressed', button.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+  };
+
+  document.querySelectorAll('[data-year]').forEach((el) => {
+    el.textContent = String(new Date().getFullYear());
   });
 
-  // Modal functions
-  function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    
-    // Focus trap: focus first focusable element
-    const focusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    if (focusable) focusable.focus();
+  const starBox = document.getElementById('gh-stars');
+  const starCount = document.getElementById('gh-star-count');
+  if (starBox && starCount) {
+    const CACHE_KEY = 'mos-gh-stars';
+    const showStars = (count) => {
+      starCount.textContent = Number(count).toLocaleString(root.getAttribute('lang') || 'de');
+      starBox.hidden = false;
+    };
+    let cached = null;
+    try {
+      cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+    } catch {}
+    if (cached && typeof cached.count === 'number' && Date.now() - cached.time < 600000) {
+      showStars(cached.count);
+    } else {
+      fetch('https://api.github.com/repos/mos-nas/mos-releases')
+        .then((res) => res.json())
+        .then((data) => {
+          if (typeof data.stargazers_count !== 'number') return;
+          showStars(data.stargazers_count);
+          try {
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify({ count: data.stargazers_count, time: Date.now() }));
+          } catch {}
+        })
+        .catch(() => {});
+    }
   }
 
-  function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  // Close modal on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const openModalEl = document.querySelector('.legal-modal.is-open');
-      if (openModalEl) closeModal(openModalEl.id);
-    }
-  });
-
-  // Carousel functionality
-  function initCarousel() {
-    const carousel = document.querySelector('.carousel');
-    const container = document.querySelector('.carousel-container');
-    const prevBtn = document.querySelector('[data-action="carousel-prev"]');
-    const nextBtn = document.querySelector('[data-action="carousel-next"]');
-    
-    if (!carousel || !container || !prevBtn || !nextBtn) return;
-
-    let currentIndex = 0;
-    const totalItems = document.querySelectorAll('.carousel-item').length;
-
-    function updateCarousel() {
-      const offset = -(currentIndex * (100 / totalItems));
-      container.style.transform = `translateX(${offset}%)`;
-    }
-
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % totalItems;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-      updateCarousel();
-    }
-
-    prevBtn.addEventListener('click', prevSlide);
-    nextBtn.addEventListener('click', nextSlide);
-
-    // Auto-advance carousel every 5 seconds
-    setInterval(nextSlide, 5000);
-  }
-
-  // Initialize carousel when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCarousel);
-  } else {
-    initCarousel();
-  }
+  if (typeof initLanguage === 'function') initLanguage();
 })();

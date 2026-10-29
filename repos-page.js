@@ -53,7 +53,7 @@
         : '';
       return (
         `<li class="repo-card">` +
-        `<div class="repo-card__head"><i class="fa-solid fa-code-branch" aria-hidden="true"></i> ` +
+        `<div class="repo-card__head"><svg class="i" aria-hidden="true"><use href="#i-git-branch"></use></svg> ` +
         `<span class="repo-card__name">${name}</span></div>` +
         desc +
         `<a class="repo-card__url" href="${esc(url)}" target="_blank" rel="noopener">${esc(url)}</a>` +

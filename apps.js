@@ -64,23 +64,23 @@
 
     const media = icon
       ? `<img src="${esc(icon)}" alt="${name}" loading="lazy" decoding="async" />`
-      : `<i class="fa-solid fa-cube app-card__placeholder" aria-hidden="true"></i>`;
+      : `<svg class="i app-card__placeholder" aria-hidden="true"><use href="#i-box"></use></svg>`;
 
     const maintainerChip = maintainer
-      ? `<span class="app-card__maintainer" title="${maintainer}"><i class="fa-solid fa-user" aria-hidden="true"></i> ${maintainer}</span>`
+      ? `<span class="app-card__maintainer" title="${maintainer}"><svg class="i" aria-hidden="true"><use href="#i-user"></use></svg> ${maintainer}</span>`
       : '';
 
     const actions = [];
     if (repository && repository !== viewUrl) {
       actions.push(
         `<a class="btn btn-secondary" href="${esc(repository)}" target="_blank" rel="noopener">` +
-        `<i class="fa-solid fa-code-branch" aria-hidden="true"></i> ${esc(t('apps.source', 'Source'))}</a>`
+        `<svg class="i" aria-hidden="true"><use href="#i-git-branch"></use></svg> ${esc(t('apps.source', 'Source'))}</a>`
       );
     }
     if (viewUrl) {
       actions.push(
         `<a class="btn btn-primary" href="${esc(viewUrl)}" target="_blank" rel="noopener">` +
-        `<i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> ${esc(t('apps.view', 'View'))}</a>`
+        `<svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg> ${esc(t('apps.view', 'View'))}</a>`
       );
     } else {
       actions.push(`<span class="btn btn-secondary is-disabled">${esc(t('apps.noLink', 'No link'))}</span>`);

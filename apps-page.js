@@ -74,22 +74,22 @@
 
     const media = icon
       ? `<img src="${esc(icon)}" alt="${name}" loading="lazy" decoding="async" />`
-      : `<i class="fa-solid fa-cube app-card__placeholder" aria-hidden="true"></i>`;
+      : `<svg class="i app-card__placeholder" aria-hidden="true"><use href="#i-box"></use></svg>`;
 
     const maintainerChip = maintainer
-      ? `<span class="app-card__maintainer" title="${maintainer}"><i class="fa-solid fa-user" aria-hidden="true"></i> ${maintainer}</span>`
+      ? `<span class="app-card__maintainer" title="${maintainer}"><svg class="i" aria-hidden="true"><use href="#i-user"></use></svg> ${maintainer}</span>`
       : '';
 
     const actions = [];
     if (website) {
       actions.push(
         `<a class="btn btn-secondary" href="${esc(website)}" target="_blank" rel="noopener">` +
-        `<i class="fa-solid fa-globe" aria-hidden="true"></i> ${esc(t('apps.webpage', 'Webpage'))}</a>`
+        `<svg class="i" aria-hidden="true"><use href="#i-globe"></use></svg> ${esc(t('apps.webpage', 'Webpage'))}</a>`
       );
     }
     actions.push(
       `<button type="button" class="btn btn-primary" data-action="details">` +
-      `<i class="fa-solid fa-circle-info" aria-hidden="true"></i> ${esc(t('apps.details', 'Details'))}</button>`
+      `<svg class="i" aria-hidden="true"><use href="#i-info"></use></svg> ${esc(t('apps.details', 'Details'))}</button>`
     );
 
     return (
@@ -177,7 +177,7 @@
 
     parts.push(
       `<button type="button" class="apps-page-btn apps-page-nav" data-page="${currentPage - 1}"${prevDisabled} aria-label="${esc(t('apps.page.prev', 'Zurück'))}">` +
-      `<i class="fa-solid fa-chevron-left" aria-hidden="true"></i> <span class="hide-sm">${esc(t('apps.page.prev', 'Zurück'))}</span></button>`
+      `<svg class="i" aria-hidden="true"><use href="#i-chevron-left"></use></svg> <span class="hide-sm">${esc(t('apps.page.prev', 'Zurück'))}</span></button>`
     );
 
     pageWindow(totalPages, currentPage).forEach((p) => {
@@ -192,7 +192,7 @@
 
     parts.push(
       `<button type="button" class="apps-page-btn apps-page-nav" data-page="${currentPage + 1}"${nextDisabled} aria-label="${esc(t('apps.page.next', 'Weiter'))}">` +
-      `<span class="hide-sm">${esc(t('apps.page.next', 'Weiter'))}</span> <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>`
+      `<span class="hide-sm">${esc(t('apps.page.next', 'Weiter'))}</span> <svg class="i" aria-hidden="true"><use href="#i-chevron-right"></use></svg></button>`
     );
 
     pager.innerHTML = parts.join('');
@@ -296,7 +296,7 @@
         const label = esc(repoDisplay(url));
         if (href) {
           return '<li><a href="' + esc(href) + '" target="_blank" rel="noopener">' +
-            '<i class="fa-solid fa-code-branch" aria-hidden="true"></i> ' + label + '</a></li>';
+            '<svg class="i" aria-hidden="true"><use href="#i-git-branch"></use></svg> ' + label + '</a></li>';
         }
         return '<li>' + label + '</li>';
       }).join('');
@@ -325,7 +325,7 @@
 
   function detailLink(href, icon, label) {
     return `<a class="app-detail__link" href="${esc(href)}" target="_blank" rel="noopener">` +
-      `<i class="fa-solid ${icon}" aria-hidden="true"></i> <span>${esc(label)}</span></a>`;
+      `<svg class="i" aria-hidden="true"><use href="#i-${icon}"></use></svg> <span>${esc(label)}</span></a>`;
   }
 
   function detailRow(label, valueHtml) {
@@ -361,14 +361,14 @@
 
     const media = icon
       ? `<img src="${esc(icon)}" alt="${name}" decoding="async" />`
-      : `<i class="fa-solid fa-cube" aria-hidden="true"></i>`;
+      : `<svg class="i" aria-hidden="true"><use href="#i-box"></use></svg>`;
 
     const links = [];
-    if (website) links.push(detailLink(website, 'fa-globe', t('apps.webpage', 'Webpage')));
-    if (repository) links.push(detailLink(repository, 'fa-code-branch', t('apps.repository', 'Repository')));
-    if (donate) links.push(detailLink(donate, 'fa-gift', t('apps.donate', 'Spenden')));
-    if (readme) links.push(detailLink(readme, 'fa-file-lines', t('apps.readme', 'Readme')));
-    if (support) links.push(detailLink(support, 'fa-life-ring', t('apps.support', 'Support')));
+    if (website) links.push(detailLink(website, 'globe', t('apps.webpage', 'Webpage')));
+    if (repository) links.push(detailLink(repository, 'git-branch', t('apps.repository', 'Repository')));
+    if (donate) links.push(detailLink(donate, 'gift', t('apps.donate', 'Spenden')));
+    if (readme) links.push(detailLink(readme, 'file-text', t('apps.readme', 'Readme')));
+    if (support) links.push(detailLink(support, 'life-buoy', t('apps.support', 'Support')));
 
     const rows = [];
     rows.push(detailRow(t('apps.type', 'Typ'), esc(typeLabel(app.type))));
@@ -378,7 +378,7 @@
     if (app.created_at) rows.push(detailRow(t('apps.created', 'Erstellt'), esc(fmtDate(app.created_at))));
     if (app.updated_at) rows.push(detailRow(t('apps.updated', 'Aktualisiert'), esc(fmtDate(app.updated_at))));
     if (maintainerDonate) rows.push(detailRow(t('apps.donate', 'Spenden'),
-      `<a href="${esc(maintainerDonate)}" target="_blank" rel="noopener"><i class="fa-solid fa-gift" aria-hidden="true"></i></a>`));
+      `<a href="${esc(maintainerDonate)}" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-gift"></use></svg></a>`));
 
     const typeChip = app.type ? `<span class="app-detail__type">${esc(typeLabel(app.type))}</span>` : '';
     const shareLink = appShareUrl(app);
@@ -391,7 +391,7 @@
           `<div class="app-detail__name-row">` +
             `<h2 id="apps-detail-title" class="app-detail__name">${name}</h2>` +
             `<button type="button" class="app-detail__share" data-action="copy-link" data-link="${esc(shareLink)}" title="${shareTitle}" aria-label="${shareTitle}">` +
-              `<i class="fa-solid fa-link" aria-hidden="true"></i>` +
+              `<svg class="i" aria-hidden="true"><use href="#i-link"></use></svg>` +
             `</button>` +
           `</div>` +
           (maintainer ? `<div class="app-detail__maintainer">${maintainer}</div>` : '') +
@@ -444,15 +444,15 @@
   }
 
   function flashCopied(btn) {
-    const icon = btn.querySelector('i');
+    const icon = btn.querySelector('use');
     btn.classList.add('is-copied');
-    if (icon) icon.className = 'fa-solid fa-check';
+    if (icon) icon.setAttribute('href', '#i-check');
     const copied = t('apps.linkCopied', 'Link kopiert');
     btn.title = copied;
     btn.setAttribute('aria-label', copied);
     setTimeout(() => {
       btn.classList.remove('is-copied');
-      if (icon) icon.className = 'fa-solid fa-link';
+      if (icon) icon.setAttribute('href', '#i-link');
       const label = t('apps.copyLink', 'Link kopieren');
       btn.title = label;
       btn.setAttribute('aria-label', label);
