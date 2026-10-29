@@ -65,12 +65,6 @@
       setMenu(false);
     }
 
-    const langButton = target.closest('.lang [data-lang]');
-    if (langButton && typeof setLanguage === 'function') {
-      setLanguage(langButton.getAttribute('data-lang'));
-      return;
-    }
-
     const opener = target.closest('[data-dialog-open]');
     if (opener) {
       const dialog = document.getElementById(opener.getAttribute('data-dialog-open'));
@@ -93,12 +87,6 @@
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') setMenu(false);
   });
-
-  window.updateLanguageDisplay = function (lang) {
-    document.querySelectorAll('.lang [data-lang]').forEach((button) => {
-      button.setAttribute('aria-pressed', button.getAttribute('data-lang') === lang ? 'true' : 'false');
-    });
-  };
 
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = String(new Date().getFullYear());
@@ -131,6 +119,4 @@
         .catch(() => {});
     }
   }
-
-  if (typeof initLanguage === 'function') initLanguage();
 })();

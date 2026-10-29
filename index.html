@@ -20,6 +20,7 @@
     <link rel="preload" href="./assets/fonts/red-hat-text-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <script>
       (function () {
+        var root = document.documentElement;
         var t = null;
         try {
           t = localStorage.getItem('mos-landing-theme');
@@ -27,11 +28,15 @@
         if (t !== 'light' && t !== 'dark') {
           t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
-        document.documentElement.setAttribute('data-theme', t);
+        root.setAttribute('data-theme', t);
+        root.setAttribute('data-i18n-state', 'pending');
+        setTimeout(function () {
+          if (root.getAttribute('data-i18n-state') === 'pending') root.setAttribute('data-i18n-state', 'ready');
+        }, 3000);
       })();
     </script>
     <link rel="stylesheet" href="./styles.css" />
-    <script defer src="./translations.js"></script>
+    <script defer src="./i18n.js"></script>
     <script defer src="./script.js"></script>
     <script defer src="./apps.js"></script>
   </head>
@@ -67,23 +72,20 @@
 <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></symbol>
 </svg>
 
-    <a class="skip-link" href="#main" data-i18n="skipLink">Zum Inhalt springen</a>
+    <a class="skip-link" href="#main" data-i18n="skipLink"></a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="./" data-i18n-aria-label="brand.ariaLabel" aria-label="MOS Start">
-          <img class="brand-logo only-light" src="./assets/mos-black.png" width="521" height="236" data-i18n-alt="brand.alt" alt="MOS" />
-          <img class="brand-logo only-dark" src="./assets/mos-white.png" width="521" height="236" data-i18n-alt="brand.alt" alt="MOS" />
+        <a class="brand" href="./" data-i18n-aria-label="brand.ariaLabel">
+          <img class="brand-logo only-light" src="./assets/mos-black.png" width="521" height="236" data-i18n-alt="brand.alt" />
+          <img class="brand-logo only-dark" src="./assets/mos-white.png" width="521" height="236" data-i18n-alt="brand.alt" />
         </a>
-        <nav class="nav" id="site-nav" data-i18n-aria-label="nav.ariaLabel" aria-label="Hauptnavigation"><a class="nav-link" href="#funktionen" data-i18n="nav.features">Funktionen</a><a class="nav-link" href="#hub" data-i18n="nav.hub">MOS Hub</a><a class="nav-link" href="#opensource" data-i18n="nav.opensource">Open Source</a><a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a><a class="nav-link" href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="nav.docs">Dokumentation</a></nav>
+        <nav class="nav" id="site-nav" data-i18n-aria-label="nav.ariaLabel"><a class="nav-link" href="#funktionen" data-i18n="nav.features"></a><a class="nav-link" href="#hub" data-i18n="nav.hub"></a><a class="nav-link" href="#opensource" data-i18n="nav.opensource"></a><a class="nav-link" href="#faq" data-i18n="nav.faq"></a><a class="nav-link" href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="nav.docs"></a></nav>
         <div class="header-actions">
           
-          <a class="gh-link" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" data-i18n-title="header.github.title" data-i18n-aria-label="header.github.title" aria-label="MOS auf GitHub" title="MOS auf GitHub"><svg class="i i--brand" aria-hidden="true"><use href="#b-github"></use></svg><span class="gh-stars" id="gh-stars" hidden><svg class="i" aria-hidden="true"><use href="#i-star"></use></svg><span id="gh-star-count"></span></span></a>
-          <button class="icon-btn" type="button" data-action="toggle-theme" data-i18n-title="header.theme.title" data-i18n-aria-label="header.theme.ariaLabel" aria-label="Theme umschalten" title="Theme"><svg class="i only-dark" aria-hidden="true"><use href="#i-sun"></use></svg><svg class="i only-light" aria-hidden="true"><use href="#i-moon"></use></svg></button>
-          <div class="lang" role="group" data-i18n-aria-label="header.language.ariaLabel" aria-label="Sprache umschalten">
-            <button type="button" data-lang="de" aria-pressed="true">DE</button>
-            <button type="button" data-lang="en" aria-pressed="false">EN</button>
-          </div>
-          <button class="icon-btn menu-toggle" type="button" data-action="toggle-menu" aria-expanded="false" aria-controls="site-nav" data-i18n-aria-label="nav.menu" aria-label="Menü"><svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+          <a class="gh-link" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" data-i18n-title="header.github.title" data-i18n-aria-label="header.github.title"><svg class="i i--brand" aria-hidden="true"><use href="#b-github"></use></svg><span class="gh-stars" id="gh-stars" hidden><svg class="i" aria-hidden="true"><use href="#i-star"></use></svg><span id="gh-star-count"></span></span></a>
+          <button class="icon-btn" type="button" data-action="toggle-theme" data-i18n-title="header.theme.title" data-i18n-aria-label="header.theme.ariaLabel"><svg class="i only-dark" aria-hidden="true"><use href="#i-sun"></use></svg><svg class="i only-light" aria-hidden="true"><use href="#i-moon"></use></svg></button>
+          <div class="lang" role="group" data-lang-switch data-i18n-aria-label="header.language.ariaLabel"></div>
+          <button class="icon-btn menu-toggle" type="button" data-action="toggle-menu" aria-expanded="false" aria-controls="site-nav" data-i18n-aria-label="nav.menu"><svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg></button>
         </div>
       </div>
     </header>
@@ -91,22 +93,22 @@
     <main id="main">
       <section class="hero" id="top">
         <div class="container">
-          <h1 data-i18n="hero.title">MOS – das Betriebssystem für deinen Homeserver</h1>
-          <p class="lead" data-i18n="hero.lead">MOS verwaltet Festplatten, Pools, Docker, LXC und VMs in einer Weboberfläche. Es basiert auf Devuan, läuft ohne Telemetrie und ist Open Source.</p>
+          <h1 data-i18n="hero.title"></h1>
+          <p class="lead" data-i18n="hero.lead"></p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-download"></use></svg><span data-i18n="hero.download">MOS herunterladen</span></a>
-            <a class="btn" href="https://docs.mos-official.net" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-book-open"></use></svg><span data-i18n="hero.docs">Dokumentation lesen</span></a>
+            <a class="btn btn-primary" href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-download"></use></svg><span data-i18n="hero.download"></span></a>
+            <a class="btn" href="https://docs.mos-official.net" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-book-open"></use></svg><span data-i18n="hero.docs"></span></a>
           </div>
-          <ul class="facts" data-i18n-aria-label="facts.ariaLabel" aria-label="Eckdaten">
-            <li><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="facts.devuan">Basiert auf Devuan</span></li>
-            <li><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="facts.telemetry">Keine Telemetrie</span></li>
-            <li><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="facts.cloud">Keine erzwungenen Cloud-Dienste</span></li>
-            <li><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="facts.license">Open Source unter AGPLv3</span></li>
+          <ul class="facts" data-i18n-aria-label="facts.ariaLabel">
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="facts.devuan"></span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="facts.telemetry"></span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="facts.cloud"></span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg><span data-i18n="facts.license"></span></li>
           </ul>
           <div class="shot">
-            <button class="shot-open" type="button" data-dialog-open="lightbox" data-i18n-aria-label="hero.screenshot.open" aria-label="Screenshot vergrößern">
-              <img class="only-light" src="./assets/dashboard_light.png" width="1748" height="1452" data-i18n-alt="hero.screenshot.alt" fetchpriority="high" decoding="async" alt="Das MOS-Dashboard mit Systeminfos, Netzwerkverkehr, Pools und Disks" />
-              <img class="only-dark" src="./assets/dashboard_dark.png" width="1746" height="1443" data-i18n-alt="hero.screenshot.alt" fetchpriority="high" decoding="async" alt="Das MOS-Dashboard mit Systeminfos, Netzwerkverkehr, Pools und Disks" />
+            <button class="shot-open" type="button" data-dialog-open="lightbox" data-i18n-aria-label="hero.screenshot.open">
+              <img class="only-light" src="./assets/dashboard_light.png" width="1748" height="1452" data-i18n-alt="hero.screenshot.alt" fetchpriority="high" decoding="async" />
+              <img class="only-dark" src="./assets/dashboard_dark.png" width="1746" height="1443" data-i18n-alt="hero.screenshot.alt" fetchpriority="high" decoding="async" />
             </button>
           </div>
         </div>
@@ -115,35 +117,35 @@
       <section class="section" id="funktionen">
         <div class="container chapter">
           <div class="chapter__head">
-            <h2 data-i18n="features.title">Eine Oberfläche für den ganzen Server</h2>
+            <h2 data-i18n="features.title"></h2>
           </div>
           <div class="chapter__body">
           <div class="group">
-            <h3 data-i18n="features.storage.title">Speicher</h3>
-            <p data-i18n="features.storage.text">Pools und Dateisysteme anlegen, SMB- und NFS-Shares verwalten, Rechte und Attribute setzen.</p>
-            <ul class="linklist"><li><a class="link" href="https://docs.mos-official.net/docs/Quick-Start/Create-Storage-Pool" target="_blank" rel="noopener"><span data-i18n="features.storage.link">Storage-Pool erstellen</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li></ul>
+            <h3 data-i18n="features.storage.title"></h3>
+            <p data-i18n="features.storage.text"></p>
+            <ul class="linklist"><li><a class="link" href="https://docs.mos-official.net/docs/Quick-Start/Create-Storage-Pool" target="_blank" rel="noopener"><span data-i18n="features.storage.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li></ul>
           </div>
           <div class="group">
-            <h3 data-i18n="features.containers.title">Container und VMs</h3>
-            <p data-i18n="features.containers.text">Docker mit Images, Containern, Logs, Netzwerken, Volumes und Compose. LXC mit Snapshots und Backups. VMs mit CPU- und RAM-Zuteilung, GPU- und USB-Passthrough und Snapshots.</p>
+            <h3 data-i18n="features.containers.title"></h3>
+            <p data-i18n="features.containers.text"></p>
             <ul class="linklist">
-              <li><a class="link" href="https://docs.mos-official.net/docs/Virtualization/Docker-Service" target="_blank" rel="noopener"><span data-i18n="features.docker.link">Docker</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
-              <li><a class="link" href="https://docs.mos-official.net/docs/Virtualization/LXC-Service" target="_blank" rel="noopener"><span data-i18n="features.lxc.link">LXC</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
-              <li><a class="link" href="https://docs.mos-official.net/docs/Virtualization/VM-Service" target="_blank" rel="noopener"><span data-i18n="features.vm.link">VMs</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
+              <li><a class="link" href="https://docs.mos-official.net/docs/Virtualization/Docker-Service" target="_blank" rel="noopener"><span data-i18n="features.docker.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
+              <li><a class="link" href="https://docs.mos-official.net/docs/Virtualization/LXC-Service" target="_blank" rel="noopener"><span data-i18n="features.lxc.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
+              <li><a class="link" href="https://docs.mos-official.net/docs/Virtualization/VM-Service" target="_blank" rel="noopener"><span data-i18n="features.vm.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
             </ul>
           </div>
           <div class="group">
-            <h3 data-i18n="features.system.title">System und Zugriff</h3>
-            <p data-i18n="features.system.text">CPU, RAM, Disks, Temperaturen und Netzwerk im Blick, ein Webterminal im Browser, Benachrichtigungen in Echtzeit, Updates mit Rollback und Benutzer mit Rollen.</p>
+            <h3 data-i18n="features.system.title"></h3>
+            <p data-i18n="features.system.text"></p>
             <ul class="linklist">
-              <li><a class="link" href="https://docs.mos-official.net/docs/System-Management/System-Configuration/System-Settings" target="_blank" rel="noopener"><span data-i18n="features.settings.link">Systemeinstellungen</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
-              <li><a class="link" href="https://docs.mos-official.net/docs/User-Management/Users" target="_blank" rel="noopener"><span data-i18n="features.users.link">Benutzer und Rollen</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
+              <li><a class="link" href="https://docs.mos-official.net/docs/System-Management/System-Configuration/System-Settings" target="_blank" rel="noopener"><span data-i18n="features.settings.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
+              <li><a class="link" href="https://docs.mos-official.net/docs/User-Management/Users" target="_blank" rel="noopener"><span data-i18n="features.users.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li>
             </ul>
           </div>
           <div class="group">
-            <h3 data-i18n="features.extend.title">Erweitern</h3>
-            <p data-i18n="features.extend.text">Zusätzliche Funktionen kommen als Plugins. Apps und Templates holst du aus dem MOS Hub. Die REST-API und ein WebSocket stehen für eigene Tools bereit.</p>
-            <ul class="linklist"><li><a class="link" href="https://docs.mos-official.net/docs/API/MOS-API-Overview" target="_blank" rel="noopener"><span data-i18n="features.api.link">API-Überblick</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li></ul>
+            <h3 data-i18n="features.extend.title"></h3>
+            <p data-i18n="features.extend.text"></p>
+            <ul class="linklist"><li><a class="link" href="https://docs.mos-official.net/docs/API/MOS-API-Overview" target="_blank" rel="noopener"><span data-i18n="features.api.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li></ul>
           </div>
           </div>
         </div>
@@ -153,12 +155,12 @@
         <div class="container">
           <div class="hub-head">
             <div>
-              <h2 data-i18n="hub.title">MOS Hub</h2>
-              <p data-i18n="hub.text">Apps und Templates für Docker, Compose und Plugins. Du installierst sie mit einem Klick direkt in MOS.</p>
+              <h2 data-i18n="hub.title"></h2>
+              <p data-i18n="hub.text"></p>
             </div>
-            <a class="btn" href="./apps.html"><span data-i18n="apps.viewAll">Alle Apps ansehen</span><svg class="i" aria-hidden="true"><use href="#i-chevron-right"></use></svg></a>
+            <a class="btn" href="./apps.html"><span data-i18n="apps.viewAll"></span><svg class="i" aria-hidden="true"><use href="#i-chevron-right"></use></svg></a>
           </div>
-          <div id="apps-status" class="apps-status" data-i18n="apps.loading">Lade Apps…</div>
+          <div id="apps-status" class="apps-status"></div>
           <div id="apps-grid" class="apps-grid" data-limit="8" hidden></div>
         </div>
       </section>
@@ -166,31 +168,31 @@
       <section class="section" id="opensource">
         <div class="container chapter">
           <div class="chapter__head">
-            <h2 data-i18n="section.opensource.title">Open Source</h2>
-            <p data-i18n="section.opensource.subtitle">Transparenz, Community und Kontrolle über dein eigenes Setup.</p>
+            <h2 data-i18n="section.opensource.title"></h2>
+            <p data-i18n="section.opensource.subtitle"></p>
           </div>
           <div class="chapter__body">
             <div class="group">
-              <h3 data-i18n="opensource.license.title">Lizenz</h3>
-              <p data-i18n="opensource.license.text">MOS ist (und bleibt) Open Source und steht unter der GNU AGPLv3.</p>
-              <ul class="linklist"><li><a class="link" href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener"><span data-i18n="opensource.license.link">Lizenz anzeigen</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li></ul>
+              <h3 data-i18n="opensource.license.title"></h3>
+              <p data-i18n="opensource.license.text"></p>
+              <ul class="linklist"><li><a class="link" href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener"><span data-i18n="opensource.license.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li></ul>
             </div>
             <div class="group">
-              <h3 data-i18n="opensource.contribute.title">Mitmachen</h3>
-              <p data-i18n="opensource.contribute.text">Feedback, Issues und Beiträge helfen, MOS besser zu machen.</p>
-              <ul class="linklist"><li><a class="link" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener"><span data-i18n="opensource.contribute.link">Zum Projekt auf GitHub</span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li></ul>
+              <h3 data-i18n="opensource.contribute.title"></h3>
+              <p data-i18n="opensource.contribute.text"></p>
+              <ul class="linklist"><li><a class="link" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener"><span data-i18n="opensource.contribute.link"></span><svg class="i" aria-hidden="true"><use href="#i-external-link"></use></svg></a></li></ul>
             </div>
             <div class="group">
-              <h3 data-i18n="community.title">Community</h3>
-              <p data-i18n="community.text">Fragen stellen, Feedback geben oder bei der Entwicklung helfen.</p>
-              <ul class="community-links"><li><a class="link" href="https://discord.com/invite/fcTMbuygTV" target="_blank" rel="noopener" data-i18n-aria-label="social.discord.ariaLabel" aria-label="Discord öffnen (neuer Tab)"><svg class="i i--brand" aria-hidden="true"><use href="#b-discord"></use></svg><span data-i18n="social.discord.label">Discord</span></a></li><li><a class="link" href="https://www.reddit.com/r/MOS_official_net/" target="_blank" rel="noopener" data-i18n-aria-label="social.reddit.ariaLabel" aria-label="Reddit öffnen (neuer Tab)"><svg class="i i--brand" aria-hidden="true"><use href="#b-reddit"></use></svg><span data-i18n="social.reddit.label">Reddit</span></a></li><li><a class="link" href="https://matrix.to/#/#mos_official:matrix.org" target="_blank" rel="noopener" data-i18n-aria-label="social.matrix.ariaLabel" aria-label="Matrix öffnen (neuer Tab)"><svg class="i i--brand" aria-hidden="true"><use href="#b-matrix"></use></svg><span data-i18n="social.matrix.label">Matrix</span></a></li><li><a class="link" href="https://x.com/mos_offi" target="_blank" rel="noopener" data-i18n-aria-label="social.x.ariaLabel" aria-label="X öffnen (neuer Tab)"><svg class="i i--brand" aria-hidden="true"><use href="#b-x"></use></svg><span data-i18n="social.x.label">X</span></a></li></ul>
+              <h3 data-i18n="community.title"></h3>
+              <p data-i18n="community.text"></p>
+              <ul class="community-links"><li><a class="link" href="https://discord.com/invite/fcTMbuygTV" target="_blank" rel="noopener" data-i18n-aria-label="social.discord.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-discord"></use></svg><span data-i18n="social.discord.label"></span></a></li><li><a class="link" href="https://www.reddit.com/r/MOS_official_net/" target="_blank" rel="noopener" data-i18n-aria-label="social.reddit.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-reddit"></use></svg><span data-i18n="social.reddit.label"></span></a></li><li><a class="link" href="https://matrix.to/#/#mos_official:matrix.org" target="_blank" rel="noopener" data-i18n-aria-label="social.matrix.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-matrix"></use></svg><span data-i18n="social.matrix.label"></span></a></li><li><a class="link" href="https://x.com/mos_offi" target="_blank" rel="noopener" data-i18n-aria-label="social.x.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-x"></use></svg><span data-i18n="social.x.label"></span></a></li></ul>
             </div>
             <div class="group">
-              <h3 data-i18n="section.partners.title">Partner</h3>
-              <p data-i18n="section.partners.subtitle">Projektpartner und unterstützende Organisationen</p>
+              <h3 data-i18n="section.partners.title"></h3>
+              <p data-i18n="section.partners.subtitle"></p>
               <ul class="partner-logos">
-                <li><img class="logo-mono" src="./assets/devuan-logo.png" width="960" height="960" alt="" /><span data-i18n="partners.devuan">Devuan</span></li>
-                <li><img src="./assets/weblate-logo.png" width="960" height="960" alt="" /><span data-i18n="partners.weblate">Weblate</span></li>
+                <li><img class="logo-mono" src="./assets/devuan-logo.png" width="960" height="960" alt="" /><span data-i18n="partners.devuan"></span></li>
+                <li><img src="./assets/weblate-logo.png" width="960" height="960" alt="" /><span data-i18n="partners.weblate"></span></li>
               </ul>
             </div>
           </div>
@@ -200,45 +202,45 @@
       <section class="section section--sunk" id="faq">
         <div class="container chapter">
           <div class="chapter__head">
-            <h2 data-i18n="section.faq.title">FAQ</h2>
-            <p data-i18n="section.faq.subtitle">Kurz beantwortet, damit du direkt starten kannst.</p>
+            <h2 data-i18n="section.faq.title"></h2>
+            <p data-i18n="section.faq.subtitle"></p>
           </div>
           <div class="faq">
             <details>
-              <summary data-i18n="faq.what.title">Was ist MOS?</summary>
-              <p data-i18n-html="faq.what.text">MOS ist ein leichtgewichtiges, Devuan‑basiertes Betriebssystem für Homelabs und kleine Server. Die Web‑UI ist ein Client der MOS‑API und bildet System‑Monitoring, Storage/Pools, Benutzerverwaltung, Container (Docker, LXC) und virtuelle Maschinen ab. Mehr dazu in der Doku: <a href="https://docs.mos-official.net/docs/Quick-Start/WebUI-Overview" target="_blank" rel="noopener">WebUI‑Overview</a>.</p>
+              <summary data-i18n="faq.what.title"></summary>
+              <p data-i18n-html="faq.what.text"></p>
             </details>
             <details>
-              <summary data-i18n="faq.arm64.title">Gibt es einen ARM64 Build?</summary>
-              <p data-i18n-html="faq.arm64.text">Ja - mittlerweile ebenfalls stabil verfügbar.</p>
+              <summary data-i18n="faq.arm64.title"></summary>
+              <p data-i18n-html="faq.arm64.text"></p>
             </details>
             <details>
-              <summary data-i18n="faq.services.title">Welche Dienste und Plattformen werden unterstützt?</summary>
-              <p data-i18n-html="faq.services.text">MOS ist service‑orientiert: verfügbar sind u. a. Dashboard, Storage/Pools/Shares, Users, Docker‑Service, LXC‑Service, VM‑Service, Webterminal sowie optionale Module wie MOS Hub und MOS Notify. Welche Funktionen sichtbar sind, hängt von den aktivierten Services ab. Details zu einzelnen Diensten findest du in der Doku (z. B. <a href="https://docs.mos-official.net/docs/Virtualization/Docker-Service" target="_blank" rel="noopener">Docker</a>, <a href="https://docs.mos-official.net/docs/Virtualization/LXC-Service" target="_blank" rel="noopener">LXC</a>, <a href="https://docs.mos-official.net/docs/Virtualization/VM-Service" target="_blank" rel="noopener">VM</a>).</p>
+              <summary data-i18n="faq.services.title"></summary>
+              <p data-i18n-html="faq.services.text"></p>
             </details>
             <details>
-              <summary data-i18n="faq.install.title">Wie installiere und betreibe ich MOS?</summary>
-              <p data-i18n-html="faq.install.text">Lade das offizielle Release‑Image (siehe <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Releases</a>), schreibe es auf ein Bootmedium und boote das Zielsystem. Folge dem <a href="https://docs.mos-official.net/docs/Installation/Create-Bootable-Media" target="_blank" rel="noopener">Quick‑Start / Installation</a> in der Doku: Netzwerk konfigurieren, Storage‑Pool anlegen, Services aktivieren und erste Container/VMs starten. Die Web‑UI ist statisch; das Backend/Services müssen entsprechend eingerichtet sein (API, Notify).</p>
+              <summary data-i18n="faq.install.title"></summary>
+              <p data-i18n-html="faq.install.text"></p>
             </details>
             <details>
-              <summary data-i18n="faq.security.title">Wie wird Zugriff und Sicherheit gehandhabt?</summary>
-              <p data-i18n-html="faq.security.text">MOS verwendet tokenbasierte Authentifizierung; für produktiven Einsatz empfiehlt sich ein Betrieb hinter TLS und einem Reverse Proxy. Folge den Prinzipien „Least Privilege“, halte System und Services aktuell und überwache Logs/Benachrichtigungen. Siehe auch: <a href="https://docs.mos-official.net/docs/System-Management/System-Configuration/System-Settings" target="_blank" rel="noopener">System‑Management</a>.</p>
+              <summary data-i18n="faq.security.title"></summary>
+              <p data-i18n-html="faq.security.text"></p>
             </details>
             <details>
-              <summary data-i18n="faq.plugins.title">Wie funktionieren Plugins und Erweiterungen?</summary>
-              <p data-i18n-html="faq.plugins.text">MOS ist modular aufgebaut: Plugins erweitern die Oberfläche und gegebenenfalls API‑Funktionen. Nur registrierte und aktivierte Plugins erscheinen in der UI; Installation/Management erfolgen über die jeweiligen Module und die Doku. Mehr dazu in der Dokumentation: <a href="https://docs.mos-official.net/docs/" target="_blank" rel="noopener">MOS Docs</a>.</p>
+              <summary data-i18n="faq.plugins.title"></summary>
+              <p data-i18n-html="faq.plugins.text"></p>
             </details>
             <details>
-              <summary data-i18n="faq.updates.title">Wie bekomme ich Updates und pflege MOS?</summary>
-              <p data-i18n-html="faq.updates.text">Updates und Releases werden über das Projekt‑Repository / die Releases verteilt. Backend und UI können getrennt aktualisiert werden; die Doku beschreibt Update‑ und Rollback‑Verfahren. Release-Übersicht: <a href="https://github.com/mos-nas/mos-releases/releases" target="_blank" rel="noopener">Releases</a>.</p>
+              <summary data-i18n="faq.updates.title"></summary>
+              <p data-i18n-html="faq.updates.text"></p>
             </details>
             <details>
-              <summary data-i18n="faq.opensource.title">Ist MOS Open Source?</summary>
-              <p data-i18n-html="faq.opensource.text">Ja — MOS und die zugehörige Dokumentation sind Open Source. Siehe die LICENSE‑Datei im jeweiligen Repository für die konkrete Lizenzinformation: <a href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</p>
+              <summary data-i18n="faq.opensource.title"></summary>
+              <p data-i18n-html="faq.opensource.text"></p>
             </details>
             <details>
-              <summary data-i18n="faq.help.title">Wo finde ich Hilfe oder möchte beitragen?</summary>
-              <p data-i18n-html="faq.help.text">Für Hilfe, Issues und Beiträge nutze das GitHub‑Repository (Issues/PRs) oder die Doku. Die Dokumentation enthält Quick‑Start‑Anleitungen, System‑Management‑Guides und Hinweise zu Community/Support: <a href="https://docs.mos-official.net/docs/" target="_blank" rel="noopener">MOS Docs</a>.</p>
+              <summary data-i18n="faq.help.title"></summary>
+              <p data-i18n-html="faq.help.text"></p>
             </details>
           </div>
         </div>
@@ -248,62 +250,64 @@
     <footer class="footer">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <img class="brand-logo only-light" src="./assets/mos-black.png" width="521" height="236" data-i18n-alt="brand.alt" alt="MOS" />
-          <img class="brand-logo only-dark" src="./assets/mos-white.png" width="521" height="236" data-i18n-alt="brand.alt" alt="MOS" />
+          <img class="brand-logo only-light" src="./assets/mos-black.png" width="521" height="236" data-i18n-alt="brand.alt" />
+          <img class="brand-logo only-dark" src="./assets/mos-white.png" width="521" height="236" data-i18n-alt="brand.alt" />
           <span class="muted small">&copy; <span data-year></span></span>
         </div>
         <div class="footer-links">
-          <a href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="footer.docs">Docs</a>
-          <a href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">AGPLv3</a>
-          <button type="button" data-dialog-open="imprint-dialog" data-i18n="footer.imprint">Impressum</button>
-          <button type="button" data-dialog-open="privacy-dialog" data-i18n="footer.privacy">Datenschutz</button>
+          <a href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="footer.docs"></a>
+          <a href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license"></a>
+          <button type="button" data-dialog-open="imprint-dialog" data-i18n="footer.imprint"></button>
+          <button type="button" data-dialog-open="privacy-dialog" data-i18n="footer.privacy"></button>
         </div>
+        <div class="footer-social"><a class="icon-btn" href="https://discord.com/invite/fcTMbuygTV" target="_blank" rel="noopener" data-i18n-aria-label="social.discord.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-discord"></use></svg></a><a class="icon-btn" href="https://www.reddit.com/r/MOS_official_net/" target="_blank" rel="noopener" data-i18n-aria-label="social.reddit.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-reddit"></use></svg></a><a class="icon-btn" href="https://matrix.to/#/#mos_official:matrix.org" target="_blank" rel="noopener" data-i18n-aria-label="social.matrix.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-matrix"></use></svg></a><a class="icon-btn" href="https://x.com/mos_offi" target="_blank" rel="noopener" data-i18n-aria-label="social.x.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-x"></use></svg></a></div>
       </div>
     </footer>
+    <nav class="social-rail" data-i18n-aria-label="social.ariaLabel"><a class="social-tab" href="https://discord.com/invite/fcTMbuygTV" target="_blank" rel="noopener" data-i18n-aria-label="social.discord.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-discord"></use></svg><span data-i18n="social.discord.label"></span></a><a class="social-tab" href="https://www.reddit.com/r/MOS_official_net/" target="_blank" rel="noopener" data-i18n-aria-label="social.reddit.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-reddit"></use></svg><span data-i18n="social.reddit.label"></span></a><a class="social-tab" href="https://matrix.to/#/#mos_official:matrix.org" target="_blank" rel="noopener" data-i18n-aria-label="social.matrix.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-matrix"></use></svg><span data-i18n="social.matrix.label"></span></a><a class="social-tab" href="https://x.com/mos_offi" target="_blank" rel="noopener" data-i18n-aria-label="social.x.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-x"></use></svg><span data-i18n="social.x.label"></span></a></nav>
 
     <dialog class="lightbox" id="lightbox" data-backdrop-close>
-      <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="lightbox.close" aria-label="Schließen"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
-      <img class="only-light" src="./assets/dashboard_light.png" data-i18n-alt="lightbox.imageAlt" alt="MOS Web UI Screenshot vergrößert" />
-      <img class="only-dark" src="./assets/dashboard_dark.png" data-i18n-alt="lightbox.imageAlt" alt="MOS Web UI Screenshot vergrößert" />
+      <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="lightbox.close"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
+      <img class="only-light" src="./assets/dashboard_light.png" data-i18n-alt="lightbox.imageAlt" />
+      <img class="only-dark" src="./assets/dashboard_dark.png" data-i18n-alt="lightbox.imageAlt" />
     </dialog>
     <dialog class="sheet" id="imprint-dialog" aria-labelledby="imprint-title" data-backdrop-close>
       <div class="sheet__bar">
-        <h2 id="imprint-title" data-i18n="imprint.title">Impressum</h2>
-        <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="modal.close" aria-label="Schließen"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
+        <h2 id="imprint-title" data-i18n="imprint.title"></h2>
+        <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="modal.close"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
       </div>
       <div class="sheet__body">
-        <h3 data-i18n="imprint.responsible.title">Angaben gemäß § 5 ECG</h3>
-        <p><span data-i18n="imprint.responsible.name">Christoph Hummer</span><br /><span data-i18n="imprint.responsible.address">Santk Joahnnesstraße 40/1</span><br /><span data-i18n="imprint.responsible.city">3293 Lunz am See</span><br /><span data-i18n="imprint.responsible.country">Österreich</span></p>
-        <h3 data-i18n="imprint.contact.title">Kontakt</h3>
-        <p data-i18n="imprint.contact.email">E-Mail: admin@mos-official.net</p>
-        <h3 data-i18n="imprint.disclaimer.title">Haftungsausschluss</h3>
-        <h4 data-i18n="imprint.disclaimer.content.title">Haftung für Inhalte</h4>
-        <p data-i18n="imprint.disclaimer.content.text">Die Inhalte dieser Seite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.</p>
-        <h4 data-i18n="imprint.disclaimer.links.title">Haftung für Links</h4>
-        <p data-i18n="imprint.disclaimer.links.text">Diese Seite enthält Links zu externen Webseiten Dritter, auf deren Inhalte kein Einfluss besteht. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p></div>
+        <h3 data-i18n="imprint.responsible.title"></h3>
+        <p><span data-i18n="imprint.responsible.name"></span><br /><span data-i18n="imprint.responsible.address"></span><br /><span data-i18n="imprint.responsible.city"></span><br /><span data-i18n="imprint.responsible.country"></span></p>
+        <h3 data-i18n="imprint.contact.title"></h3>
+        <p data-i18n="imprint.contact.email"></p>
+        <h3 data-i18n="imprint.disclaimer.title"></h3>
+        <h4 data-i18n="imprint.disclaimer.content.title"></h4>
+        <p data-i18n="imprint.disclaimer.content.text"></p>
+        <h4 data-i18n="imprint.disclaimer.links.title"></h4>
+        <p data-i18n="imprint.disclaimer.links.text"></p></div>
     </dialog>
     <dialog class="sheet" id="privacy-dialog" aria-labelledby="privacy-title" data-backdrop-close>
       <div class="sheet__bar">
-        <h2 id="privacy-title" data-i18n="privacy.title">Datenschutzerklärung</h2>
-        <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="modal.close" aria-label="Schließen"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
+        <h2 id="privacy-title" data-i18n="privacy.title"></h2>
+        <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="modal.close"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
       </div>
       <div class="sheet__body">
-        <h3 data-i18n="privacy.overview.title">1. Datenschutz auf einen Blick</h3>
-        <p data-i18n="privacy.overview.text">Diese Website erhebt keine personenbezogenen Daten, verwendet keine Cookies und setzt keine Tracking-Tools ein.</p>
-        <h3 data-i18n="privacy.responsible.title">2. Verantwortlicher</h3>
-        <p><span data-i18n="privacy.responsible.name">Christoph Hummer</span><br /><span data-i18n="privacy.responsible.address">Santk Joahnnesstraße 40/1</span><br /><span data-i18n="privacy.responsible.city">3293 Lunz am See</span><br /><span data-i18n="privacy.responsible.email">E-Mail: admin@mos-official.net</span></p>
-        <h3 data-i18n="privacy.hosting.title">3. Hosting</h3>
-        <p data-i18n="privacy.hosting.text">Diese Website wird selbst gehostet. Bei jedem Zugriff können technische Informationen in Server-Logfiles gespeichert werden (IP-Adresse, Zeitpunkt, aufgerufene Seite, Browser-Typ). Diese Daten dienen ausschließlich der Sicherheit und Fehleranalyse und werden nicht an Dritte weitergegeben. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren Betrieb der Website).</p>
-        <h3 data-i18n="privacy.cloudflare.title">4. Cloudflare</h3>
-        <p data-i18n="privacy.cloudflare.text">Diese Website nutzt Cloudflare (Cloudflare, Inc.) als Sicherheits- und Performance-Dienst. Dabei werden Verbindungsdaten (z.B. IP-Adresse) über Cloudflare-Server geleitet. Cloudflare ist ein US-Unternehmen, das DSGVO-konforme Standardvertragsklauseln (SCCs) und ein Data Processing Addendum (DPA) anbietet. Weitere Informationen: https://www.cloudflare.com/de-de/privacypolicy/</p>
-        <h3 data-i18n="privacy.cookies.title">5. Cookies</h3>
-        <p data-i18n="privacy.cookies.text">Diese Website verwendet keine Cookies.</p>
-        <h3 data-i18n="privacy.localStorage.title">6. Lokale Speicherung</h3>
-        <p data-i18n="privacy.localStorage.text">Diese Website speichert ausschließlich technisch notwendige Einstellungen (Theme- und Sprachpräferenz) im lokalen Speicher Ihres Browsers (localStorage). Diese Daten werden nicht an Server übertragen und können jederzeit durch Löschen der Browser-Daten entfernt werden.</p>
-        <h3 data-i18n="privacy.external.title">7. Externe Links</h3>
-        <p data-i18n="privacy.external.text">Diese Website enthält Links zu externen Websites (z.B. GitHub). Beim Anklicken dieser Links verlassen Sie diese Website. Für die Datenschutzpraktiken dieser externen Seiten sind deren jeweilige Betreiber verantwortlich.</p>
-        <h3 data-i18n="privacy.rights.title">8. Ihre Rechte</h3>
-        <p data-i18n="privacy.rights.text">Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Bei Beschwerden können Sie sich an die zuständige Aufsichtsbehörde wenden.</p></div>
+        <h3 data-i18n="privacy.overview.title"></h3>
+        <p data-i18n="privacy.overview.text"></p>
+        <h3 data-i18n="privacy.responsible.title"></h3>
+        <p><span data-i18n="privacy.responsible.name"></span><br /><span data-i18n="privacy.responsible.address"></span><br /><span data-i18n="privacy.responsible.city"></span><br /><span data-i18n="privacy.responsible.email"></span></p>
+        <h3 data-i18n="privacy.hosting.title"></h3>
+        <p data-i18n="privacy.hosting.text"></p>
+        <h3 data-i18n="privacy.cloudflare.title"></h3>
+        <p data-i18n="privacy.cloudflare.text"></p>
+        <h3 data-i18n="privacy.cookies.title"></h3>
+        <p data-i18n="privacy.cookies.text"></p>
+        <h3 data-i18n="privacy.localStorage.title"></h3>
+        <p data-i18n="privacy.localStorage.text"></p>
+        <h3 data-i18n="privacy.external.title"></h3>
+        <p data-i18n="privacy.external.text"></p>
+        <h3 data-i18n="privacy.rights.title"></h3>
+        <p data-i18n="privacy.rights.text"></p></div>
     </dialog>
   </body>
 </html>

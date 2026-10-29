@@ -37,7 +37,7 @@
     return document.documentElement.getAttribute('lang') || 'de';
   }
   function t(key, fallback) {
-    const val = typeof i18n === 'function' ? i18n(key, curLang()) : key;
+    const val = window.i18n ? window.i18n.t(key) : key;
     if (val === key && fallback !== undefined) return fallback;
     return val;
   }
@@ -582,9 +582,5 @@
   });
   langObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', load);
-  } else {
-    load();
-  }
+  (window.i18n ? window.i18n.ready : Promise.resolve()).then(load);
 })();

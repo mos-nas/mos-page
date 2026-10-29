@@ -13,6 +13,7 @@
     <link rel="preload" href="./assets/fonts/red-hat-text-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <script>
       (function () {
+        var root = document.documentElement;
         var t = null;
         try {
           t = localStorage.getItem('mos-landing-theme');
@@ -20,11 +21,15 @@
         if (t !== 'light' && t !== 'dark') {
           t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
-        document.documentElement.setAttribute('data-theme', t);
+        root.setAttribute('data-theme', t);
+        root.setAttribute('data-i18n-state', 'pending');
+        setTimeout(function () {
+          if (root.getAttribute('data-i18n-state') === 'pending') root.setAttribute('data-i18n-state', 'ready');
+        }, 3000);
       })();
     </script>
     <link rel="stylesheet" href="./styles.css" />
-    <script defer src="./translations.js"></script>
+    <script defer src="./i18n.js"></script>
     <script defer src="./script.js"></script>
     <script defer src="./apps-page.js"></script>
   </head>
@@ -60,23 +65,20 @@
 <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" /></symbol>
 </svg>
 
-    <a class="skip-link" href="#apps" data-i18n="skipLink">Zum Inhalt springen</a>
+    <a class="skip-link" href="#apps" data-i18n="skipLink"></a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="./index.html" data-i18n-aria-label="brand.ariaLabel" aria-label="MOS Start">
-          <img class="brand-logo only-light" src="./assets/mos-black.png" width="521" height="236" data-i18n-alt="brand.alt" alt="MOS" />
-          <img class="brand-logo only-dark" src="./assets/mos-white.png" width="521" height="236" data-i18n-alt="brand.alt" alt="MOS" />
+        <a class="brand" href="./index.html" data-i18n-aria-label="brand.ariaLabel">
+          <img class="brand-logo only-light" src="./assets/mos-black.png" width="521" height="236" data-i18n-alt="brand.alt" />
+          <img class="brand-logo only-dark" src="./assets/mos-white.png" width="521" height="236" data-i18n-alt="brand.alt" />
         </a>
-        <nav class="nav" id="site-nav" data-i18n-aria-label="nav.ariaLabel" aria-label="Hauptnavigation"><a class="nav-link" href="./index.html" data-i18n="nav.home">Startseite</a><a class="nav-link" href="./apps.html" aria-current="page" data-i18n="nav.apps">Apps</a><a class="nav-link" href="./repos.html" data-i18n="nav.repos">Repositories</a><a class="nav-link" href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="nav.docs">Dokumentation</a></nav>
+        <nav class="nav" id="site-nav" data-i18n-aria-label="nav.ariaLabel"><a class="nav-link" href="./index.html" data-i18n="nav.home"></a><a class="nav-link" href="./apps.html" aria-current="page" data-i18n="nav.apps"></a><a class="nav-link" href="./repos.html" data-i18n="nav.repos"></a><a class="nav-link" href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="nav.docs"></a></nav>
         <div class="header-actions">
-          <button id="apps-repos-btn" class="btn" type="button" data-i18n-title="apps.repos.title" data-i18n-aria-label="apps.repos.title" hidden aria-label="Eingebundene Repositories" title="Eingebundene Repositories"><svg class="i" aria-hidden="true"><use href="#i-git-branch"></use></svg><span class="hide-sm" data-i18n="apps.repos.button">Repositories</span></button>
-          <a class="gh-link" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" data-i18n-title="header.github.title" data-i18n-aria-label="header.github.title" aria-label="MOS auf GitHub" title="MOS auf GitHub"><svg class="i i--brand" aria-hidden="true"><use href="#b-github"></use></svg><span class="gh-stars" id="gh-stars" hidden><svg class="i" aria-hidden="true"><use href="#i-star"></use></svg><span id="gh-star-count"></span></span></a>
-          <button class="icon-btn" type="button" data-action="toggle-theme" data-i18n-title="header.theme.title" data-i18n-aria-label="header.theme.ariaLabel" aria-label="Theme umschalten" title="Theme"><svg class="i only-dark" aria-hidden="true"><use href="#i-sun"></use></svg><svg class="i only-light" aria-hidden="true"><use href="#i-moon"></use></svg></button>
-          <div class="lang" role="group" data-i18n-aria-label="header.language.ariaLabel" aria-label="Sprache umschalten">
-            <button type="button" data-lang="de" aria-pressed="true">DE</button>
-            <button type="button" data-lang="en" aria-pressed="false">EN</button>
-          </div>
-          <button class="icon-btn menu-toggle" type="button" data-action="toggle-menu" aria-expanded="false" aria-controls="site-nav" data-i18n-aria-label="nav.menu" aria-label="Menü"><svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+          <button id="apps-repos-btn" class="btn" type="button" data-i18n-title="apps.repos.title" data-i18n-aria-label="apps.repos.title" hidden><svg class="i" aria-hidden="true"><use href="#i-git-branch"></use></svg><span class="hide-sm" data-i18n="apps.repos.button"></span></button>
+          <a class="gh-link" href="https://github.com/mos-nas/mos-releases" target="_blank" rel="noopener" data-i18n-title="header.github.title" data-i18n-aria-label="header.github.title"><svg class="i i--brand" aria-hidden="true"><use href="#b-github"></use></svg><span class="gh-stars" id="gh-stars" hidden><svg class="i" aria-hidden="true"><use href="#i-star"></use></svg><span id="gh-star-count"></span></span></a>
+          <button class="icon-btn" type="button" data-action="toggle-theme" data-i18n-title="header.theme.title" data-i18n-aria-label="header.theme.ariaLabel"><svg class="i only-dark" aria-hidden="true"><use href="#i-sun"></use></svg><svg class="i only-light" aria-hidden="true"><use href="#i-moon"></use></svg></button>
+          <div class="lang" role="group" data-lang-switch data-i18n-aria-label="header.language.ariaLabel"></div>
+          <button class="icon-btn menu-toggle" type="button" data-action="toggle-menu" aria-expanded="false" aria-controls="site-nav" data-i18n-aria-label="nav.menu"><svg class="i" aria-hidden="true"><use href="#i-menu"></use></svg></button>
         </div>
       </div>
     </header>
@@ -85,32 +87,32 @@
       <section id="apps">
         <div class="container">
           <div class="page-head">
-            <h1 data-i18n="apps.title">Verfügbare Apps</h1>
-            <p data-i18n="apps.subtitle">Apps &amp; Templates aus dem MOS Hub – mit einem Klick in MOS installierbar.</p>
+            <h1 data-i18n="apps.title"></h1>
+            <p data-i18n="apps.subtitle"></p>
           </div>
           <div class="page-body">
             <div class="apps-toolbar">
               <div class="apps-search">
                 <svg class="i apps-search__icon" aria-hidden="true"><use href="#i-search"></use></svg>
-                <input id="apps-search" type="search" class="apps-search__input" data-i18n-placeholder="apps.search.placeholder" autocomplete="off" placeholder="Apps durchsuchen…" />
+                <input id="apps-search" type="search" class="apps-search__input" data-i18n-placeholder="apps.search.placeholder" autocomplete="off" />
               </div>
-              <select id="apps-sort" class="apps-select" data-i18n-aria-label="apps.sort.label" aria-label="Sortierung">
-                <option value="date_desc" data-i18n="apps.sort.dateDesc">Neueste zuerst</option>
-                <option value="date_asc" data-i18n="apps.sort.dateAsc">Älteste zuerst</option>
-                <option value="updated_desc" data-i18n="apps.sort.updated">Zuletzt aktualisiert</option>
-                <option value="name_asc" data-i18n="apps.sort.nameAsc">Name (A–Z)</option>
+              <select id="apps-sort" class="apps-select" data-i18n-aria-label="apps.sort.label">
+                <option value="date_desc" data-i18n="apps.sort.dateDesc"></option>
+                <option value="date_asc" data-i18n="apps.sort.dateAsc"></option>
+                <option value="updated_desc" data-i18n="apps.sort.updated"></option>
+                <option value="name_asc" data-i18n="apps.sort.nameAsc"></option>
               </select>
-              <select id="apps-type" class="apps-select" data-i18n-aria-label="apps.filter.type" aria-label="Typ">
-                <option value="" data-i18n="apps.filter.all">Alle</option>
+              <select id="apps-type" class="apps-select" data-i18n-aria-label="apps.filter.type">
+                <option value="" data-i18n="apps.filter.all"></option>
               </select>
-              <select id="apps-category" class="apps-select" data-i18n-aria-label="apps.filter.category" aria-label="Kategorie">
-                <option value="" data-i18n="apps.filter.all">Alle</option>
+              <select id="apps-category" class="apps-select" data-i18n-aria-label="apps.filter.category">
+                <option value="" data-i18n="apps.filter.all"></option>
               </select>
             </div>
             <div id="apps-summary" class="apps-summary" aria-live="polite"></div>
-            <div id="apps-status" class="apps-status" data-i18n="apps.loading">Lade Apps…</div>
+            <div id="apps-status" class="apps-status"></div>
             <div id="apps-grid" class="apps-grid" hidden></div>
-            <nav id="apps-pagination" class="apps-pagination" data-i18n-aria-label="apps.pagination.ariaLabel" hidden aria-label="Seitennavigation"></nav>
+            <nav id="apps-pagination" class="apps-pagination" data-i18n-aria-label="apps.pagination.ariaLabel" hidden></nav>
           </div>
         </div>
       </section>
@@ -119,24 +121,26 @@
     <footer class="footer">
       <div class="container footer-inner">
         <div class="footer-brand">
-          <img class="brand-logo only-light" src="./assets/mos-black.png" width="521" height="236" data-i18n-alt="brand.alt" alt="MOS" />
-          <img class="brand-logo only-dark" src="./assets/mos-white.png" width="521" height="236" data-i18n-alt="brand.alt" alt="MOS" />
+          <img class="brand-logo only-light" src="./assets/mos-black.png" width="521" height="236" data-i18n-alt="brand.alt" />
+          <img class="brand-logo only-dark" src="./assets/mos-white.png" width="521" height="236" data-i18n-alt="brand.alt" />
           <span class="muted small">&copy; <span data-year></span></span>
         </div>
         <div class="footer-links">
-          <a href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="footer.docs">Docs</a>
-          <a href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">AGPLv3</a>
-          <button type="button" data-dialog-open="imprint-dialog" data-i18n="footer.imprint">Impressum</button>
-          <button type="button" data-dialog-open="privacy-dialog" data-i18n="footer.privacy">Datenschutz</button>
+          <a href="https://docs.mos-official.net" target="_blank" rel="noopener" data-i18n="footer.docs"></a>
+          <a href="https://github.com/ich777/mos-frontend/blob/master/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license"></a>
+          <button type="button" data-dialog-open="imprint-dialog" data-i18n="footer.imprint"></button>
+          <button type="button" data-dialog-open="privacy-dialog" data-i18n="footer.privacy"></button>
         </div>
+        <div class="footer-social"><a class="icon-btn" href="https://discord.com/invite/fcTMbuygTV" target="_blank" rel="noopener" data-i18n-aria-label="social.discord.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-discord"></use></svg></a><a class="icon-btn" href="https://www.reddit.com/r/MOS_official_net/" target="_blank" rel="noopener" data-i18n-aria-label="social.reddit.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-reddit"></use></svg></a><a class="icon-btn" href="https://matrix.to/#/#mos_official:matrix.org" target="_blank" rel="noopener" data-i18n-aria-label="social.matrix.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-matrix"></use></svg></a><a class="icon-btn" href="https://x.com/mos_offi" target="_blank" rel="noopener" data-i18n-aria-label="social.x.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-x"></use></svg></a></div>
       </div>
     </footer>
+    <nav class="social-rail" data-i18n-aria-label="social.ariaLabel"><a class="social-tab" href="https://discord.com/invite/fcTMbuygTV" target="_blank" rel="noopener" data-i18n-aria-label="social.discord.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-discord"></use></svg><span data-i18n="social.discord.label"></span></a><a class="social-tab" href="https://www.reddit.com/r/MOS_official_net/" target="_blank" rel="noopener" data-i18n-aria-label="social.reddit.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-reddit"></use></svg><span data-i18n="social.reddit.label"></span></a><a class="social-tab" href="https://matrix.to/#/#mos_official:matrix.org" target="_blank" rel="noopener" data-i18n-aria-label="social.matrix.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-matrix"></use></svg><span data-i18n="social.matrix.label"></span></a><a class="social-tab" href="https://x.com/mos_offi" target="_blank" rel="noopener" data-i18n-aria-label="social.x.ariaLabel"><svg class="i i--brand" aria-hidden="true"><use href="#b-x"></use></svg><span data-i18n="social.x.label"></span></a></nav>
 
     <div id="apps-repos-modal" class="repos-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="apps-repos-title">
       <div class="repos-modal__backdrop" data-repos-close></div>
       <div class="repos-modal__content">
-        <button class="repos-modal__close" type="button" data-repos-close data-i18n-aria-label="modal.close" aria-label="Schließen"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
-        <h2 id="apps-repos-title" data-i18n="apps.repos.title">Eingebundene Repositories</h2>
+        <button class="repos-modal__close" type="button" data-repos-close data-i18n-aria-label="modal.close"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
+        <h2 id="apps-repos-title" data-i18n="apps.repos.title"></h2>
         <p class="muted small" id="apps-repos-count"></p>
         <ul id="apps-repos-list" class="repos-list"></ul>
       </div>
@@ -145,48 +149,48 @@
     <div id="apps-detail-modal" class="repos-modal app-detail-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="apps-detail-title">
       <div class="repos-modal__backdrop" data-detail-close></div>
       <div class="repos-modal__content app-detail__content">
-        <button class="repos-modal__close" type="button" data-detail-close data-i18n-aria-label="modal.close" aria-label="Schließen"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
+        <button class="repos-modal__close" type="button" data-detail-close data-i18n-aria-label="modal.close"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
         <div id="apps-detail-content"></div>
       </div>
     </div>
     <dialog class="sheet" id="imprint-dialog" aria-labelledby="imprint-title" data-backdrop-close>
       <div class="sheet__bar">
-        <h2 id="imprint-title" data-i18n="imprint.title">Impressum</h2>
-        <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="modal.close" aria-label="Schließen"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
+        <h2 id="imprint-title" data-i18n="imprint.title"></h2>
+        <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="modal.close"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
       </div>
       <div class="sheet__body">
-        <h3 data-i18n="imprint.responsible.title">Angaben gemäß § 5 ECG</h3>
-        <p><span data-i18n="imprint.responsible.name">Christoph Hummer</span><br /><span data-i18n="imprint.responsible.address">Santk Joahnnesstraße 40/1</span><br /><span data-i18n="imprint.responsible.city">3293 Lunz am See</span><br /><span data-i18n="imprint.responsible.country">Österreich</span></p>
-        <h3 data-i18n="imprint.contact.title">Kontakt</h3>
-        <p data-i18n="imprint.contact.email">E-Mail: admin@mos-official.net</p>
-        <h3 data-i18n="imprint.disclaimer.title">Haftungsausschluss</h3>
-        <h4 data-i18n="imprint.disclaimer.content.title">Haftung für Inhalte</h4>
-        <p data-i18n="imprint.disclaimer.content.text">Die Inhalte dieser Seite wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.</p>
-        <h4 data-i18n="imprint.disclaimer.links.title">Haftung für Links</h4>
-        <p data-i18n="imprint.disclaimer.links.text">Diese Seite enthält Links zu externen Webseiten Dritter, auf deren Inhalte kein Einfluss besteht. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p></div>
+        <h3 data-i18n="imprint.responsible.title"></h3>
+        <p><span data-i18n="imprint.responsible.name"></span><br /><span data-i18n="imprint.responsible.address"></span><br /><span data-i18n="imprint.responsible.city"></span><br /><span data-i18n="imprint.responsible.country"></span></p>
+        <h3 data-i18n="imprint.contact.title"></h3>
+        <p data-i18n="imprint.contact.email"></p>
+        <h3 data-i18n="imprint.disclaimer.title"></h3>
+        <h4 data-i18n="imprint.disclaimer.content.title"></h4>
+        <p data-i18n="imprint.disclaimer.content.text"></p>
+        <h4 data-i18n="imprint.disclaimer.links.title"></h4>
+        <p data-i18n="imprint.disclaimer.links.text"></p></div>
     </dialog>
     <dialog class="sheet" id="privacy-dialog" aria-labelledby="privacy-title" data-backdrop-close>
       <div class="sheet__bar">
-        <h2 id="privacy-title" data-i18n="privacy.title">Datenschutzerklärung</h2>
-        <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="modal.close" aria-label="Schließen"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
+        <h2 id="privacy-title" data-i18n="privacy.title"></h2>
+        <button class="icon-btn" type="button" data-dialog-close data-i18n-aria-label="modal.close"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></button>
       </div>
       <div class="sheet__body">
-        <h3 data-i18n="privacy.overview.title">1. Datenschutz auf einen Blick</h3>
-        <p data-i18n="privacy.overview.text">Diese Website erhebt keine personenbezogenen Daten, verwendet keine Cookies und setzt keine Tracking-Tools ein.</p>
-        <h3 data-i18n="privacy.responsible.title">2. Verantwortlicher</h3>
-        <p><span data-i18n="privacy.responsible.name">Christoph Hummer</span><br /><span data-i18n="privacy.responsible.address">Santk Joahnnesstraße 40/1</span><br /><span data-i18n="privacy.responsible.city">3293 Lunz am See</span><br /><span data-i18n="privacy.responsible.email">E-Mail: admin@mos-official.net</span></p>
-        <h3 data-i18n="privacy.hosting.title">3. Hosting</h3>
-        <p data-i18n="privacy.hosting.text">Diese Website wird selbst gehostet. Bei jedem Zugriff können technische Informationen in Server-Logfiles gespeichert werden (IP-Adresse, Zeitpunkt, aufgerufene Seite, Browser-Typ). Diese Daten dienen ausschließlich der Sicherheit und Fehleranalyse und werden nicht an Dritte weitergegeben. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren Betrieb der Website).</p>
-        <h3 data-i18n="privacy.cloudflare.title">4. Cloudflare</h3>
-        <p data-i18n="privacy.cloudflare.text">Diese Website nutzt Cloudflare (Cloudflare, Inc.) als Sicherheits- und Performance-Dienst. Dabei werden Verbindungsdaten (z.B. IP-Adresse) über Cloudflare-Server geleitet. Cloudflare ist ein US-Unternehmen, das DSGVO-konforme Standardvertragsklauseln (SCCs) und ein Data Processing Addendum (DPA) anbietet. Weitere Informationen: https://www.cloudflare.com/de-de/privacypolicy/</p>
-        <h3 data-i18n="privacy.cookies.title">5. Cookies</h3>
-        <p data-i18n="privacy.cookies.text">Diese Website verwendet keine Cookies.</p>
-        <h3 data-i18n="privacy.localStorage.title">6. Lokale Speicherung</h3>
-        <p data-i18n="privacy.localStorage.text">Diese Website speichert ausschließlich technisch notwendige Einstellungen (Theme- und Sprachpräferenz) im lokalen Speicher Ihres Browsers (localStorage). Diese Daten werden nicht an Server übertragen und können jederzeit durch Löschen der Browser-Daten entfernt werden.</p>
-        <h3 data-i18n="privacy.external.title">7. Externe Links</h3>
-        <p data-i18n="privacy.external.text">Diese Website enthält Links zu externen Websites (z.B. GitHub). Beim Anklicken dieser Links verlassen Sie diese Website. Für die Datenschutzpraktiken dieser externen Seiten sind deren jeweilige Betreiber verantwortlich.</p>
-        <h3 data-i18n="privacy.rights.title">8. Ihre Rechte</h3>
-        <p data-i18n="privacy.rights.text">Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Bei Beschwerden können Sie sich an die zuständige Aufsichtsbehörde wenden.</p></div>
+        <h3 data-i18n="privacy.overview.title"></h3>
+        <p data-i18n="privacy.overview.text"></p>
+        <h3 data-i18n="privacy.responsible.title"></h3>
+        <p><span data-i18n="privacy.responsible.name"></span><br /><span data-i18n="privacy.responsible.address"></span><br /><span data-i18n="privacy.responsible.city"></span><br /><span data-i18n="privacy.responsible.email"></span></p>
+        <h3 data-i18n="privacy.hosting.title"></h3>
+        <p data-i18n="privacy.hosting.text"></p>
+        <h3 data-i18n="privacy.cloudflare.title"></h3>
+        <p data-i18n="privacy.cloudflare.text"></p>
+        <h3 data-i18n="privacy.cookies.title"></h3>
+        <p data-i18n="privacy.cookies.text"></p>
+        <h3 data-i18n="privacy.localStorage.title"></h3>
+        <p data-i18n="privacy.localStorage.text"></p>
+        <h3 data-i18n="privacy.external.title"></h3>
+        <p data-i18n="privacy.external.text"></p>
+        <h3 data-i18n="privacy.rights.title"></h3>
+        <p data-i18n="privacy.rights.text"></p></div>
     </dialog>
   </body>
 </html>
