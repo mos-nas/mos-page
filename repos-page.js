@@ -1,5 +1,5 @@
 // Eigenständige Seite für empfohlene Repositories (repos.html).
-// Quelle: statische recommended-repos.json (reine URL-Liste, öffentlich/zurückgegeben).
+// Quelle: statische known-repos.json (reine URL-Liste, öffentlich/zurückgegeben).
 // Getrennt von repos.json, das NUR die Index-Build-Quelle ist.
 // Der ?format=json / ?json Modifier wird bereits inline in repos.html behandelt.
 (function () {
@@ -11,7 +11,7 @@
   const status = document.getElementById('repos-status');
   const count = document.getElementById('repos-count');
   const base = (document.baseURI || window.location.href || '').replace(/[^/]*$/, '');
-  const REPOS_URL = new URL('recommended-repos.json', base).toString();
+  const REPOS_URL = new URL('known-repos.json', base).toString();
 
   // --- i18n ------------------------------------------------------------------
   function curLang() {
